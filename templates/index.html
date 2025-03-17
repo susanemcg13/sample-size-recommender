@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://getbootstrap.com/docs/5.3/examples/heroes/ -->
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.122.0">
+  <title>CICI Prototype - v0</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css"
+    rel="stylesheet">
+
+    <!-- using Flask to load the css from static/css/styles.css -->
+    <link href="{{ url_for('static', filename='css/CICI.css')}}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/heroes.css')}}" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="css/CICI.css"> -->
+
+  <!-- <link href="css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+
+  <!-- Custom styles for this template -->
+  <!-- <link href="css/heroes.css" rel="stylesheet"> -->
+</head>
+
+<body>
+  <!-- SVG symbols, e.g. "home icon"-->
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="house-door-fill" viewBox="0 0 16 16">
+      <path
+        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z">
+      </path>
+    </symbol>
+    <symbol id="question-mark" width="100%" viewBox="0 0 200 200">
+      <path id="path2382" d="m165.33 113.44a103.61 103.61 0 1 1 -207.22 0 103.61 103.61 0 1 1 207.22 0z"
+        transform="matrix(.93739 0 0 .93739 42.143 -6.3392)" stroke-width="0" fill="#fff" />
+      <g id="layer1">
+        <path id="path2413"
+          d="m100 0c-55.2 0-100 44.8-100 100-5.0495e-15 55.2 44.8 100 100 100s100-44.8 100-100-44.8-100-100-100zm0 12.812c48.13 0 87.19 39.058 87.19 87.188s-39.06 87.19-87.19 87.19-87.188-39.06-87.188-87.19 39.058-87.188 87.188-87.188zm1.47 21.25c-5.45 0.03-10.653 0.737-15.282 2.063-4.699 1.346-9.126 3.484-12.876 6.219-3.238 2.362-6.333 5.391-8.687 8.531-4.159 5.549-6.461 11.651-7.063 18.687-0.04 0.468-0.07 0.868-0.062 0.876 0.016 0.016 21.702 2.687 21.812 2.687 0.053 0 0.113-0.234 0.282-0.937 1.941-8.085 5.486-13.521 10.968-16.813 4.32-2.594 9.808-3.612 15.778-2.969 2.74 0.295 5.21 0.96 7.38 2 2.71 1.301 5.18 3.361 6.94 5.813 1.54 2.156 2.46 4.584 2.75 7.312 0.08 0.759 0.05 2.48-0.03 3.219-0.23 1.826-0.7 3.378-1.5 4.969-0.81 1.597-1.48 2.514-2.76 3.812-2.03 2.077-5.18 4.829-10.78 9.407-3.6 2.944-6.04 5.156-8.12 7.343-4.943 5.179-7.191 9.069-8.564 14.719-0.905 3.72-1.256 7.55-1.156 13.19 0.025 1.4 0.062 2.73 0.062 2.97v0.43h21.598l0.03-2.4c0.03-3.27 0.21-5.37 0.56-7.41 0.57-3.27 1.43-5 3.94-7.81 1.6-1.8 3.7-3.76 6.93-6.47 4.77-3.991 8.11-6.99 11.26-10.125 4.91-4.907 7.46-8.26 9.28-12.187 1.43-3.092 2.22-6.166 2.46-9.532 0.06-0.816 0.07-3.03 0-3.968-0.45-7.043-3.1-13.253-8.15-19.032-0.8-0.909-2.78-2.887-3.72-3.718-4.96-4.394-10.69-7.353-17.56-9.094-4.19-1.062-8.23-1.6-13.35-1.75-0.78-0.023-1.59-0.036-2.37-0.032zm-10.908 103.6v22h21.998v-22h-21.998z" />
+      </g>
+    </symbol>
+    <symbol fill="#000000" id="info-circle" width="100%" viewBox="0 0 100 100" xml:space="preserve" z-index="1000">
+      <g>
+        <path d="M17.962,24.725l1.806,0.096v2.531h-7.534v-2.406l1.045-0.094c0.568-0.063,0.916-0.254,0.916-1.014v-8.801
+   c0-0.699-0.188-0.92-0.791-0.92l-1.106-0.062v-2.626h5.666L17.962,24.725L17.962,24.725z M15.747,4.648
+   c1.394,0,2.405,1.047,2.405,2.374c0,1.331-1.014,2.313-2.438,2.313c-1.454,0-2.404-0.982-2.404-2.313
+   C13.31,5.695,14.26,4.648,15.747,4.648z M16,32C7.178,32,0,24.822,0,16S7.178,0,16,0c8.82,0,16,7.178,16,16S24.82,32,16,32z M16,3
+   C8.832,3,3,8.832,3,16s5.832,13,13,13s13-5.832,13-13S23.168,3,16,3z" />
+      </g>
+    </symbol>
+    <!-- end SVG symbols-->
+
+  </svg>
+
+  <main>
+    <!-- Bootstrap breadcrumb header  start -->
+    <div class="container my-5">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
+          <li class="breadcrumb-item">
+            <a class="link-body-emphasis" href="/">
+              <svg class="bi" width="16" height="16">
+                <use xlink:href="#house-door-fill"></use>
+              </svg>
+              <span class="visually-hidden">Home</span>
+            </a>
+          </li>
+          <li class="breadcrumb-item hide-content" id="selection-crumb">
+            <a class="link-body-emphasis fw-semibold text-decoration-none">Select</a>
+          </li>
+          <li class="breadcrumb-item hide-content" id="calculation-crumb">
+            <a class="link-body-emphasis fw-semibold text-decoration-none">Calculate</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <!-- Bootstrap breadcrumb header end -->
+
+    <!-- OVERVIEW
+
++ File is basically a breadcrumb header with three (3) main containers that toggles visibility based on the step of the process.
++ Statefulness via js variables
+
+TODO (in no particular order)
+
+1. Implement "back" functionality with maintained selection/output history
+2. Add an overview of selections on "calculate" page
+3. ????
+
+
+/OVERVIEW -->
+
+
+
+    <!-- MAIN LANDING PAGE CONTENT-->
+    <div class="px-4 py-5 my-5 text-center" id="landing-page">
+      <h1 class="display-5 fw-bold text-body-emphasis">Get a Sample Size Recommendation</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Built by researchers specializing in study design, privacy, and usability, this tool will help you decide what sample size is right for your study.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="start-button">Get started</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELECTION PAGE CONTENT  START-->
+    <div class="container hide-content" id="selection-page">
+      <div class="row">
+        <div class="col-6">
+
+          <ol>
+            <!-- METHODS-->
+
+            <li>
+              <div>
+                Which method best describes your overall study?
+                <!-- ? and ! icons on hold-->
+                <!-- <a>
+                  <svg class="question-svg-align">
+                    <use xlink:href="#question-mark"></use>
+                  </svg>
+                </a>
+                <a>
+                  <svg class="info-svg-align">
+                    <use xlink:href="#info-circle"></use>
+                  </svg>
+                </a> -->
+              </div>
+              <div class="list-group" id="method">
+                <button type="button" class="list-group-item list-group-item-action" id="survey" data-selected="false">
+                  Survey
+                </button>
+                <button type="button" class="list-group-item list-group-item-action" id="experiment"
+                  data-selected="false">
+                  Experiment
+                </button>
+                <button type="button" class="list-group-item list-group-item-action" id="interview"
+                  data-selected="false" disabled>
+                  Interview <i>Not yet available</i>
+                </button>
+                <!-- <span class="d-inline-block" tabindex="0" data-placement="right" data-toggle="tooltip" title="Disabled tooltip">
+                  <button type="button" class="list-group-item list-group-item-action" id="method-interview" disabled>
+                    C. Interview <i>Not yet available</i>
+                  </button>
+                </span> -->
+
+              </div>
+            </li>
+
+
+
+            <!-- TESTS-->
+            <li>
+              <div>
+                Which statistical test do you need a sample size for?
+                <!-- ? and ! icons on hold-->
+                <!-- <a>
+                  <svg class="question-svg-align">
+                    <use xlink:href="#question-mark"></use>
+                  </svg>
+                </a>
+                <a>
+                  <svg class="info-svg-align">
+                    <use xlink:href="#info-circle"></use>
+                  </svg>
+                </a> -->
+              </div>
+              <div class="list-group" id="test">
+                <button type="button" class="list-group-item list-group-item-action" id="T-test" data-selected="false">
+                  T-test
+                </button>
+                <button type="button" class="list-group-item list-group-item-action" id="ANOVA" data-selected="false"
+                  disabled>ANOVA <i>Not yet available</i></button>
+                <button type="button" class="list-group-item list-group-item-action" id="other" data-selected="false"
+                  disabled>Other <i>Not yet available</i> </button>
+
+              </div>
+            </li>
+
+            <!--ITEM REVEAL ON T-TEST CLICK-->
+            <div class="wrapper">
+
+              <div class="inner">
+                <!-- INDEPENDENCE -->
+                <li>
+                  <div>
+                    2. A. What type of t-test will you use?
+                    <!-- ? and ! icons on hold-->
+                    <!-- <a>
+                      <svg class="question-svg-align">
+                        <use xlink:href="#question-mark"></use>
+                      </svg>
+                    </a>
+                    <a>
+                      <svg class="info-svg-align">
+                        <use xlink:href="#info-circle"></use>
+                      </svg>
+                    </a> -->
+                  </div>
+                  <div class="list-group" id="independence">
+                    <button type="button" class="list-group-item list-group-item-action" id="independent"
+                      data-selected="false">
+                      Independent samples T-test
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" id="dependent"
+                      data-selected="false" disabled>Dependent samples T-test</button>
+                  </div>
+                </li>
+                <!-- BALANCE -->
+                <li>
+                  <div>
+                    2. B. Is the size of the participant groups you are comparing equal?
+                    <!-- ? and ! icons on hold-->
+                    <!-- <a>
+                      <svg class="question-svg-align">
+                        <use xlink:href="#question-mark"></use>
+                      </svg>
+                    </a>
+                    <a>
+                      <svg class="info-svg-align">
+                        <use xlink:href="#info-circle"></use>
+                      </svg>
+                    </a> -->
+                  </div>
+                  <div class="list-group" id="balance">
+                    <button type="button" class="list-group-item list-group-item-action" id="balance-yes"
+                      data-selected="false">
+                      Yes, each group will have the same number of participants <b>[Recommended]</b>
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" id="balance-no"
+                      data-selected="false" disabled>No, there will be a different number of participants in each group</button>
+                  </div>
+                </li>
+                <!-- ONE VS. TWO-TAILED -->
+                <li>
+                  <div>
+                    2. C. Will you use a one-tailed or a two tailed
+                    test?
+                    <!-- ? and ! icons on hold-->
+                    <!-- <a>
+                      <svg class="question-svg-align">
+                        <use xlink:href="#question-mark"></use>
+                      </svg>
+                    </a>
+                    <a>
+                      <svg class="info-svg-align">
+                        <use xlink:href="#info-circle"></use>
+                      </svg>
+                    </a> -->
+                  </div>
+                  <div class="list-group" id="tails">
+                    <button type="button" class="list-group-item list-group-item-action" id="two-tail"
+                      data-selected="false">
+                      Two-tailed test
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" id="one-tail"
+                      data-selected="false">One-tailed test</button>
+                  </div>
+                </li>
+
+              </div>
+
+            </div>
+
+          </ol>
+
+        </div>
+        <div class=".col-6"></div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="submit-test-info" disabled>Next</button>
+        </div>
+      </div>
+    </div>
+    <!-- METHODS PAGE END-->
+
+    <!-- CALCULATION PAGE START-->
+    <div class="container hide-content" id="calculation-page">
+      <div class="row">
+        <div class="col-12" id="selections-status">
+
+        </div>
+
+      </div>
+      <div class="row">
+
+
+        <!-- ALPHA -->
+        <form action="/calculate_participants" method="get">
+        <div class="col-4">
+            <label for="alpha">Alpha</label><br>
+            <!-- <input type="text" id="alpha" value="0.05"><br> -->
+            <input type="text" name="alpha_input" id="alpha_entry" placeholder="e.g. 0.05" /><br/>
+            <div id="alpha-feedback"></div>
+        </div>
+       
+           <!-- EFFECT SIZE -->
+           <div class="col-4">
+              <div id="effect-size">Effect size: 0.5</div><br>
+              <input type="text" name="effect_input" id="effect_entry" data-slider-id='ex1Slider' data-slider-min="0.2"
+              data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5"/><br/>
+              <!-- <input id="effectSizeSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0.2"
+                data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" /> -->
+              <div id="effect-size-feedback"></div>
+          </div>     
+
+        <!-- POWER -->
+        <div class="col-4">
+            <div id="power">Power: 0.8</div><br>
+            <!-- <label for="power">Power</label><br> -->
+            <!-- <input id="powerSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0.5" data-slider-max="0.99"
+              data-slider-step="0.01" data-slider-value="0.8" /> -->
+            <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text" data-slider-min="0.5" data-slider-max="0.99"
+            data-slider-step="0.01" data-slider-value="0.8" /><br/>
+            <div id="power-feedback"></div>
+        </div>
+      </div>
+
+
+      <!-- CALCULATE BUTTON START -->
+      <div class="row">
+        <div class="col-12">
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="submit">Submit</button>
+        </form>
+
+
+      <!-- PARTICIPANT COUNT ROW START -->
+
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4" id="count-label">Participant count</div>
+        <div class="col-4"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4" id="participant-num">{{num_participants}}</div>
+        <div class="col-4"></div>
+      </div>
+
+      <!-- PARTICIPANT COUNT ROW END -->        
+           
+            <!-- <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="calculate-participants"
+              disabled>Calculate</button> -->
+          </div>
+        </div>
+      </div>
+      <!-- CALCULATE BUTTON END -->
+
+      <!-- OUTPUT LOG START -->
+      <div class="row">
+        <div class="col-12" id="logList">
+        </div>
+      </div>
+      <!-- OUTPUT LOG END -->
+      
+      <!-- EXPORT LOG BUTTON START -->
+      <div class="row">
+        <div class="col-12">
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="export-log">Export Log</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPORT LOG BUTTON END -->
+
+    </div>
+
+
+  </main>
+
+  <!-- JS INCLUDES -->
+
+  <!-- BOOTSTRAP -->
+  <!-- <script src="js/bootstrap.bundle.min.js.download"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script> -->
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js.download')}}"></script>
+
+  <!-- JSTAT -->
+  <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+  <!-- BOOTSTRAP SLIDER -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"></script>
+
+  <!-- CUSTOM SCRIPTS -->
+  <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+  <!-- <script src="js/scripts.js"></script> -->
+
+
+</body>
+
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Flask App for CICI</title>
+  using Flask to load the css from static/css/styles.css -->
+    <!-- <link href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet" /> -->
+</head>
+<body>
+
+    <!-- <form action="/calculate_participants" method="get">
+        <input type="text" name="alpha_input" id="alpha_entry" placeholder="e.g. 0.05" /><br/>
+        <input type="text" name="power_input" id="power_entry" placeholder="e.g. 0.8" /><br/>
+        <input type="text" name="effect_input" id="effect_entry" placeholder="e.g. 0.5" /><br/>
+        <button type="submit">Submit</button>
+    </form> -->
+
+</body>
+</html>
