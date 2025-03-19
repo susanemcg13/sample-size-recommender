@@ -1,10 +1,60 @@
 
 const queryString = window.location.search;
 const current_url = window.location.pathname;
-console.log(current_url); // Output: "?param1=value1&param2=value2"
+console.log(current_url); 
+console.log(queryString); // Output: "?param1=value1&param2=value2"
+
+var powerMetrics = {
+    "effect-size":"",
+    "alpha":"",
+    "power":"",
+    "num-participants":""
+}
+
+var effectSlider = new Slider('#effect_entry', {
+	formatter: function(value) {
+		return 'Current value: ' + value;
+	}
+
+});
+
+effectSlider.on("change", effectUpdate);
+
+var powerSlider = new Slider('#power_entry', {
+	formatter: function(value) {
+		return 'Current value: ' + value;
+	}
+});
+powerSlider.on("change", powerUpdate);
+
 
 if (current_url == "/calculate_participants"){
-    showCalculator();
+    
+    // this is hideous, but we'll worry about that once we know whether it works ;)
+
+    // BAD BAD BAD!!!
+    document.getElementById("landing-page").classList.add("hide-content");
+    document.getElementById("selection-page").classList.add("hide-content");
+    document.getElementById("calculation-crumb").classList.remove("hide-content");
+    document.getElementById("calculation-page").classList.remove("hide-content");
+
+    // make sure to update the values of the metrics from the query string here
+
+    query_params = new URLSearchParams(queryString);
+    powerMetrics["effect-size"] = query_params.get('effect_input');
+    powerMetrics["alpha"] = query_params.get('alpha_input');
+    powerMetrics["power"] = query_params.get('power_input');
+    powerMetrics["num-participants"] = document.getElementById("participant-num").innerHTML;
+
+// NEED TO UPDATE/TRULY POPULATE ALPHA TEXT BOX FROM QUERY STRING
+// THINK THERE"S A ROGUE SOMETHING HAPPENING BECAUSE OF MY FORM SETUP
+    
+
+    powerSlider.setValue(powerMetrics["power"]);
+    document.getElementById("power").innerHTML = "Power: "+powerMetrics["power"];
+    effectSlider.setValue(powerMetrics["effect-size"]);
+    document.getElementById("effect-size").innerHTML = "Effect size: "+powerMetrics["effect-size"];
+
 }
 
 var selections = {
@@ -15,12 +65,6 @@ var selections = {
     "tails":""
 }
 
-var powerMetrics = {
-    "effect-size":"",
-    "alpha":"",
-    "power":"",
-    "num-participants":""
-}
 
 var calculationsLog = {
     "observations":[]
@@ -44,14 +88,14 @@ for (var i = 0; i < buttonsList.length; i++) {
     }
 }
 
-var formFieldsList = document.getElementsByTagName("input");
+// var formFieldsList = document.getElementsByTagName("input");
 
-for (var i = 0; i < formFieldsList.length; i++){
+// for (var i = 0; i < formFieldsList.length; i++){
 
-    var aFormField = formFieldsList[i];
-    aFormField.addEventListener("blur", fieldBlur);
+//     var aFormField = formFieldsList[i];
+//     aFormField.addEventListener("blur", fieldBlur);
 
-}
+// }
 
 
 // So far I have to set up the slider handlers piecemeal, which I do not love
@@ -60,24 +104,10 @@ for (var i = 0; i < formFieldsList.length; i++){
 // DISABLING SLIDER EFFECTS WHILE I TRY TO GET THE MAIN FLASK APP RUNNING
 
 
-var effectSlider = new Slider('#effect_entry', {
-	formatter: function(value) {
-		return 'Current value: ' + value;
-	}
-});
 
-effectSlider.on("change", effectUpdate);
-
-var powerSlider = new Slider('#power_entry', {
-	formatter: function(value) {
-		return 'Current value: ' + value;
-	}
-});
-powerSlider.on("change", powerUpdate);
 
 
 function effectUpdate(sliderValue){
-    console.log(sliderValue.newValue);
     powerMetrics["effect-size"] = sliderValue.newValue;
     document.getElementById("effect-size").innerHTML = "Effect size: "+sliderValue.newValue;
 
@@ -106,10 +136,10 @@ function showOptions(buttonClick){
 
 document.getElementById("start-button").addEventListener("click", showOptions);
 
-function writeSelections(){
-    var selections_div = document.getElementById("selections-status");
-    selections_div.innerHTML = "Method: "+ selections["method"] + " -> Test type: "+selections["test"]+ " -> Balance: "+selections["balance"]+ " -> Independence: "+selections["independence"]+ " -> Tails: "+selections["tails"]
-}
+// function writeSelections(){
+//     var selections_div = document.getElementById("selections-status");
+//     selections_div.innerHTML = "Method: "+ selections["method"] + " -> Test type: "+selections["test"]+ " -> Balance: "+selections["balance"]+ " -> Independence: "+selections["independence"]+ " -> Tails: "+selections["tails"]
+// }
 
 
 function showCalculator(){
@@ -119,18 +149,13 @@ function showCalculator(){
     document.getElementById("calculation-page").classList.remove("hide-content");
     // document.getElementById("calculate-participants").disabled = false;
 
-    console.log("hi there");
-    console.log(selections);
-    writeSelections();
+  //  writeSelections();
 
     
 
     // set default values of the power metrics here
- //   document.getElementById("effect-size").value = "0.5";
 
-
-    // document.getElementById("alpha").value = "0.05";
-    // document.getElementById("power").value = "0.8";
+    console.log("in show calculator");
     powerMetrics["effect-size"] = "0.5";
     powerMetrics["alpha"] = "0.05";
     powerMetrics["power"] = "0.8";
@@ -165,51 +190,51 @@ function calculateIndependentBalancedTtest(effectSize, alpha, power, tailCount){
 }
 
 
-function calculateParticipants(buttonClick){
+// function calculateParticipants(buttonClick){
   
 
-    //let's add some logic and some helper functions
+//     //let's add some logic and some helper functions
     
-    // so this is the conditional for our inital test
-    // would be helpful to get some shortnames for these so I can set/test a flag value
-    // this is repeated elsewhere 
+//     // so this is the conditional for our inital test
+//     // would be helpful to get some shortnames for these so I can set/test a flag value
+//     // this is repeated elsewhere 
 
-    var participantCount = -1;
+//     var participantCount = -1;
 
-    // HIDEOUS! But quick ;)
-    // survey or experiment, independent, balanced, two-tailed t-test
-    if((selections["method"] == "survey" || selections["method"] == "experiment")&& selections["test"] == "T-test" &&
-        selections["independence"] == "independent" && selections["balance"] == "balance-yes"
-        && (selections["tails"] == "two-tail" || selections["tails"] == "one-tail")){
-            console.log("calling function!")
-            participantCount = calculateIndependentBalancedTtest(powerMetrics["effect-size"], powerMetrics["alpha"], powerMetrics["power"], selections["tails"]);
-        }
-
-
+//     // HIDEOUS! But quick ;)
+//     // survey or experiment, independent, balanced, two-tailed t-test
+//     if((selections["method"] == "survey" || selections["method"] == "experiment")&& selections["test"] == "T-test" &&
+//         selections["independence"] == "independent" && selections["balance"] == "balance-yes"
+//         && (selections["tails"] == "two-tail" || selections["tails"] == "one-tail")){
+//             console.log("calling function!")
+//             participantCount = calculateIndependentBalancedTtest(powerMetrics["effect-size"], powerMetrics["alpha"], powerMetrics["power"], selections["tails"]);
+//         }
 
 
 
-    var participantField = document.getElementById("participant-num");
 
-    powerMetrics["num-participants"] = participantCount;
 
-    participantField.innerHTML = participantCount;
+//     var participantField = document.getElementById("participant-num");
 
-    var timestamp = new Date().toUTCString();
+//     powerMetrics["num-participants"] = participantCount;
 
-    var logObject = {
-        "effect-size":powerMetrics["effect-size"],
-        "alpha":powerMetrics["alpha"],
-        "power":powerMetrics["power"],
-        "participantCount":participantCount,
-        "generatedAt":timestamp
-    }
+//     participantField.innerHTML = participantCount;
 
-    calculationsLog["observations"].unshift(logObject);
+//     var timestamp = new Date().toUTCString();
 
-    showLog();
+//     var logObject = {
+//         "effect-size":powerMetrics["effect-size"],
+//         "alpha":powerMetrics["alpha"],
+//         "power":powerMetrics["power"],
+//         "participantCount":participantCount,
+//         "generatedAt":timestamp
+//     }
 
-}
+//     calculationsLog["observations"].unshift(logObject);
+
+//     showLog();
+
+// }
 
 function showLog(){
 
@@ -241,49 +266,49 @@ function exportLog(clickEvent){
 
 }
 
-document.getElementById("export-log").addEventListener("click",exportLog);
+// document.getElementById("export-log").addEventListener("click",exportLog);
 
 
 
-function fieldBlur(event){
+// function fieldBlur(event){
 
-    var inputField = event.target.id;
-    var inputValue = event.target.value;
-    var invalidValue = false;
-    document.getElementById("participant-num").innerHTML = "";
-    if(isNaN(inputValue)){
-        document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number."
-        invalidValue = true;
-    }
-    if(inputField == "effect-size"){
-        console.log("in effect size blur")
-        if(inputValue < 0.2 || inputValue > 0.8){
-            document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number between 0.2 and 0.8"
-            invalidValue = true;
-        }
-    }
-    if(inputField == "alpha"){
-        if(inputValue < 0.001 || inputValue > 0.1){
-            document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number between 0.1 and 0.001"
-            invalidValue = true;
-        }
-    }
-    if(inputField == "power"){
-        if(inputValue < 0.5 || inputValue > 0.99){
-            document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number between 0.50 and 0.99"
-            invalidValue = true;
-        }
-    }
+//     var inputField = event.target.id;
+//     var inputValue = event.target.value;
+//     var invalidValue = false;
+//     document.getElementById("participant-num").innerHTML = "";
+//     if(isNaN(inputValue)){
+//         document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number."
+//         invalidValue = true;
+//     }
+//     if(inputField == "effect-size"){
+//         console.log("in effect size blur")
+//         if(inputValue < 0.2 || inputValue > 0.8){
+//             document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number between 0.2 and 0.8"
+//             invalidValue = true;
+//         }
+//     }
+//     if(inputField == "alpha"){
+//         if(inputValue < 0.001 || inputValue > 0.1){
+//             document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number between 0.1 and 0.001"
+//             invalidValue = true;
+//         }
+//     }
+//     if(inputField == "power"){
+//         if(inputValue < 0.5 || inputValue > 0.99){
+//             document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number between 0.50 and 0.99"
+//             invalidValue = true;
+//         }
+//     }
 
-    var calculateButton = document.getElementById("calculate-participants");
-    if(invalidValue){
-        calculateButton.disabled = true;
-    }else{
-        powerMetrics[inputField] = inputValue;
-        // calculateButton.disabled = false;
-    }
+//     var calculateButton = document.getElementById("calculate-participants");
+//     if(invalidValue){
+//         calculateButton.disabled = true;
+//     }else{
+//         powerMetrics[inputField] = inputValue;
+//         // calculateButton.disabled = false;
+//     }
 
-}
+// }
 
 
 
@@ -299,8 +324,6 @@ function optionOut(event){
 }
 
 function optionClick(event){
-
-    
     // the names of the data parameters in "selections" variable are intentionally the same as
     // the names of each list's "id" attribute, which lets following be very concise
     // the line below records or overwrites each value as it's added.

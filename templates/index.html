@@ -14,10 +14,10 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css"
     rel="stylesheet">
 
-    <!-- using Flask to load the css from static/css/styles.css -->
-    <link href="{{ url_for('static', filename='css/CICI.css')}}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/heroes.css')}}" rel="stylesheet" />
+  <!-- using Flask to load the css from static/css/styles.css -->
+  <link href="{{ url_for('static', filename='css/CICI.css')}}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='css/heroes.css')}}" rel="stylesheet" />
   <!-- <link rel="stylesheet" href="css/CICI.css"> -->
 
   <!-- <link href="css/bootstrap.min.css" rel="stylesheet"
@@ -100,7 +100,8 @@ TODO (in no particular order)
     <div class="px-4 py-5 my-5 text-center" id="landing-page">
       <h1 class="display-5 fw-bold text-body-emphasis">Get a Sample Size Recommendation</h1>
       <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Built by researchers specializing in study design, privacy, and usability, this tool will help you decide what sample size is right for your study.</p>
+        <p class="lead mb-4">Built by researchers specializing in study design, privacy, and usability, this tool will
+          help you decide what sample size is right for your study.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="start-button">Get started</button>
         </div>
@@ -232,7 +233,8 @@ TODO (in no particular order)
                       Yes, each group will have the same number of participants <b>[Recommended]</b>
                     </button>
                     <button type="button" class="list-group-item list-group-item-action" id="balance-no"
-                      data-selected="false" disabled>No, there will be a different number of participants in each group</button>
+                      data-selected="false" disabled>No, there will be a different number of participants in each
+                      group</button>
                   </div>
                 </li>
                 <!-- ONE VS. TWO-TAILED -->
@@ -285,89 +287,93 @@ TODO (in no particular order)
         </div>
 
       </div>
-      <div class="row">
+     
+     
+     
+      <form id="calc_parameters" action="/calculate_participants" method="get">
+        <div class="row">
 
 
-        <!-- ALPHA -->
-        <form action="/calculate_participants" method="get">
-        <div class="col-4">
+          <!-- ALPHA -->
+
+          <div class="col-4">
             <label for="alpha">Alpha</label><br>
             <!-- <input type="text" id="alpha" value="0.05"><br> -->
-            <input type="text" name="alpha_input" id="alpha_entry" placeholder="e.g. 0.05" /><br/>
+            <input type="text" name="alpha_input" id="alpha_entry" placeholder="e.g. 0.05" /><br />
             <div id="alpha-feedback"></div>
-        </div>
-       
-           <!-- EFFECT SIZE -->
-           <div class="col-4">
-              <div id="effect-size">Effect size: 0.5</div><br>
-              <input type="text" name="effect_input" id="effect_entry" data-slider-id='ex1Slider' data-slider-min="0.2"
-              data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5"/><br/>
-              <!-- <input id="effectSizeSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0.2"
-                data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" /> -->
-              <div id="effect-size-feedback"></div>
-          </div>     
+          </div>
 
-        <!-- POWER -->
-        <div class="col-4">
-            <div id="power">Power: 0.8</div><br>
+          <!-- EFFECT SIZE -->
+          <div class="col-4">
+            <div id="effect-size">Effect size: 0.5</div><br>
+            <input type="text" name="effect_input" id="effect_entry" data-slider-id='ex1Slider' data-slider-min="0.2"
+              data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" /><br />
+            <!-- <input id="effectSizeSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0.2"
+                data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" /> -->
+            <div id="effect-size-feedback"></div>
+          </div>
+
+          <!-- POWER -->
+          <div class="col-4">
+            <div id="power">Power</div><br>
             <!-- <label for="power">Power</label><br> -->
             <!-- <input id="powerSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0.5" data-slider-max="0.99"
               data-slider-step="0.01" data-slider-value="0.8" /> -->
-            <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text" data-slider-min="0.5" data-slider-max="0.99"
-            data-slider-step="0.01" data-slider-value="0.8" /><br/>
+            <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text"
+              data-slider-min="0.5" data-slider-max="0.99" data-slider-step="0.01" /><br />
             <div id="power-feedback"></div>
-        </div>
-      </div>
-
-
-      <!-- CALCULATE BUTTON START -->
-      <div class="row">
-        <div class="col-12">
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="submit">Submit</button>
-        </form>
-
-
-      <!-- PARTICIPANT COUNT ROW START -->
-
-      <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4" id="count-label">Participant count</div>
-        <div class="col-4"></div>
-      </div>
-
-      <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4" id="participant-num">{{num_participants}}</div>
-        <div class="col-4"></div>
-      </div>
-
-      <!-- PARTICIPANT COUNT ROW END -->        
-           
-            <!-- <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="calculate-participants"
-              disabled>Calculate</button> -->
           </div>
         </div>
-      </div>
-      <!-- CALCULATE BUTTON END -->
+      </form>
+        <!-- PARTICIPANT COUNT ROW START -->
 
-      <!-- OUTPUT LOG START -->
-      <div class="row">
-        <div class="col-12" id="logList">
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4" id="count-label">Participant count</div>
+          <div class="col-4"></div>
         </div>
-      </div>
-      <!-- OUTPUT LOG END -->
+
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4" id="participant-num">{{num_participants}}</div>
+          <div class="col-4"></div>
+        </div>
+
+        <!-- PARTICIPANT COUNT ROW END -->
+
+
+        <!-- CALCULATE BUTTON START -->
+        <div class="row">
+          <div class="col-12">
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
+            </div>
+          </div>
       
-      <!-- EXPORT LOG BUTTON START -->
-      <div class="row">
-        <div class="col-12">
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="export-log">Export Log</button>
-          </div>
+
+
+
+
+    </div>
+    <!-- CALCULATE BUTTON END -->
+
+    <!-- OUTPUT LOG START -->
+    <!-- <div class="row">
+      <div class="col-12" id="logList">
+      </div>
+    </div> -->
+    <!-- OUTPUT LOG END -->
+
+    <!-- EXPORT LOG BUTTON START -->
+    <!-- <div class="row">
+      <div class="col-12">
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="export-log">Export Log</button>
         </div>
       </div>
+    </div> -->
 
-      <!-- EXPORT LOG BUTTON END -->
+    <!-- EXPORT LOG BUTTON END -->
 
     </div>
 
@@ -380,11 +386,12 @@ TODO (in no particular order)
   <!-- <script src="js/bootstrap.bundle.min.js.download"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script> -->
-<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js.download')}}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js.download')}}"></script>
 
   <!-- JSTAT -->
   <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
   <!-- BOOTSTRAP SLIDER -->
+  <!-- from https://seiyria.com/bootstrap-slider/ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"></script>
 
   <!-- CUSTOM SCRIPTS -->
@@ -394,27 +401,4 @@ TODO (in no particular order)
 
 </body>
 
-</html>
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Flask App for CICI</title>
-  using Flask to load the css from static/css/styles.css -->
-    <!-- <link href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet" /> -->
-</head>
-<body>
-
-    <!-- <form action="/calculate_participants" method="get">
-        <input type="text" name="alpha_input" id="alpha_entry" placeholder="e.g. 0.05" /><br/>
-        <input type="text" name="power_input" id="power_entry" placeholder="e.g. 0.8" /><br/>
-        <input type="text" name="effect_input" id="effect_entry" placeholder="e.g. 0.5" /><br/>
-        <button type="submit">Submit</button>
-    </form> -->
-
-</body>
 </html>

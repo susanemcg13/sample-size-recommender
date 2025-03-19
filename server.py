@@ -25,6 +25,9 @@ def get_participantCount():
 
     # Add some error handling here before passing the values along!
 
+    if not user_alpha:
+        user_alpha = "0.05"
+
     display_num = calculateParticipantCount(float(user_alpha), float(user_power), float(user_effect))
 
     # This is actually where we're defining the variable names that will be available in "calculate.html"
