@@ -17,18 +17,21 @@ def index():
 
 @app.route('/calculate_participants')
 def get_participantCount():
-    # This is where we're pulling values from the "index.html" form?!
+    # This is where we're pulling values from the "index.html" form
     # Let's see if the args value matches the "name" or "id" value in the form input; I'm guessing the former
     user_alpha = request.args.get('alpha_input')
     user_power = request.args.get('power_input')
     user_effect = request.args.get('effect_input')
+    numTails = request.args.get('tails_input')
 
     # Add some error handling here before passing the values along!
 
     if not user_alpha:
         user_alpha = "0.05"
+    
 
-    display_num = calculateParticipantCount(float(user_alpha), float(user_power), float(user_effect))
+
+    display_num = calculateParticipantCount(float(user_alpha), float(user_power), float(user_effect), str(numTails))
 
     # This is actually where we're defining the variable names that will be available in "calculate.html"
     return render_template(

@@ -1,4 +1,3 @@
-
 const queryString = window.location.search;
 const current_url = window.location.pathname;
 console.log(current_url); 
@@ -27,6 +26,14 @@ var powerSlider = new Slider('#power_entry', {
 });
 powerSlider.on("change", powerUpdate);
 
+var selections = {
+    "method":"",
+    "test":"",
+    "independence":"",
+    "balance":"",
+    "tails":""
+}
+
 
 if (current_url == "/calculate_participants"){
     
@@ -35,6 +42,7 @@ if (current_url == "/calculate_participants"){
     // BAD BAD BAD!!!
     document.getElementById("landing-page").classList.add("hide-content");
     document.getElementById("selection-page").classList.add("hide-content");
+    document.getElementById("selection-crumb").classList.remove("hide-content");
     document.getElementById("calculation-crumb").classList.remove("hide-content");
     document.getElementById("calculation-page").classList.remove("hide-content");
 
@@ -46,23 +54,18 @@ if (current_url == "/calculate_participants"){
     powerMetrics["power"] = query_params.get('power_input');
     powerMetrics["num-participants"] = document.getElementById("participant-num").innerHTML;
 
-// NEED TO UPDATE/TRULY POPULATE ALPHA TEXT BOX FROM QUERY STRING
-// THINK THERE"S A ROGUE SOMETHING HAPPENING BECAUSE OF MY FORM SETUP
-    
+
 
     powerSlider.setValue(powerMetrics["power"]);
     document.getElementById("power").innerHTML = "Power: "+powerMetrics["power"];
     effectSlider.setValue(powerMetrics["effect-size"]);
     document.getElementById("effect-size").innerHTML = "Effect size: "+powerMetrics["effect-size"];
+    document.getElementById("alpha_entry").value = powerMetrics["alpha"];
+    document.getElementById("tails_value").value = query_params.get('tails_input');
 
-}
 
-var selections = {
-    "method":"",
-    "test":"",
-    "independence":"",
-    "balance":"",
-    "tails":""
+
+
 }
 
 
@@ -88,24 +91,6 @@ for (var i = 0; i < buttonsList.length; i++) {
     }
 }
 
-// var formFieldsList = document.getElementsByTagName("input");
-
-// for (var i = 0; i < formFieldsList.length; i++){
-
-//     var aFormField = formFieldsList[i];
-//     aFormField.addEventListener("blur", fieldBlur);
-
-// }
-
-
-// So far I have to set up the slider handlers piecemeal, which I do not love
-// might bother to update at some point, but for now just relying on package functionality
-
-// DISABLING SLIDER EFFECTS WHILE I TRY TO GET THE MAIN FLASK APP RUNNING
-
-
-
-
 
 function effectUpdate(sliderValue){
     powerMetrics["effect-size"] = sliderValue.newValue;
@@ -120,99 +105,16 @@ function powerUpdate(sliderValue){
 
 }
 
-// DISABLING SLIDER EFFECTS WHILE I TRY TO GET THE MAIN FLASK APP RUNNING
-
-// The above functions happen on page load. Some will be overridden below so don't move that code down!
-
-
 function showOptions(buttonClick){
     document.getElementById("landing-page").classList.add("hide-content");
     document.getElementById("selection-page").classList.remove("hide-content");
     document.getElementById("selection-crumb").classList.remove("hide-content");
 }
 
-
-
-
 document.getElementById("start-button").addEventListener("click", showOptions);
 
-// function writeSelections(){
-//     var selections_div = document.getElementById("selections-status");
-//     selections_div.innerHTML = "Method: "+ selections["method"] + " -> Test type: "+selections["test"]+ " -> Balance: "+selections["balance"]+ " -> Independence: "+selections["independence"]+ " -> Tails: "+selections["tails"]
-// }
 
-
-function showCalculator(){
-    document.getElementById("landing-page").classList.add("hide-content");
-    document.getElementById("selection-page").classList.add("hide-content");
-    document.getElementById("calculation-crumb").classList.remove("hide-content");
-    document.getElementById("calculation-page").classList.remove("hide-content");
-    // document.getElementById("calculate-participants").disabled = false;
-
-  //  writeSelections();
-
-    
-
-    // set default values of the power metrics here
-
-    console.log("in show calculator");
-    powerMetrics["effect-size"] = "0.5";
-    powerMetrics["alpha"] = "0.05";
-    powerMetrics["power"] = "0.8";
-    
-}
-
-document.getElementById("submit-test-info").addEventListener("click", showCalculator);
-
-
-function calculateIndependentBalancedTtest(effectSize, alpha, power, tailCount){
-
-    var oldN = -1; // default
-    var targetN = 100000; // default with a sample size of 100K
-    var delta = .1; // default delta 
-    var groupRatio = 1; // balance - not used yet
-    var numTails = 2; // number of tails, default 2
-    if(tailCount == "one-tail"){
-        numTails = 1; 
-    }
-
-  // translation: while absolute difference between "oldN" and "n" is greater than delta (0.1 by default)
-  // set "oldN" to current value of "n" and then run whatever that stuff on the n calculation line is and that 
-  // becomes "n" FOR A SINGLE GROUP
-    while (Math.abs(oldN-targetN) > delta) {
-        oldN = targetN;
-        targetN = ((groupRatio+1)/groupRatio)*(-jStat.studentt.inv(alpha/numTails,(oldN*(groupRatio+1))-2)-jStat.studentt.inv(1-power,(oldN*(groupRatio+1))-2))**2/effectSize**2;
-    }
-
-
-    return Math.ceil(targetN*2);
-
-}
-
-
-// function calculateParticipants(buttonClick){
-  
-
-//     //let's add some logic and some helper functions
-    
-//     // so this is the conditional for our inital test
-//     // would be helpful to get some shortnames for these so I can set/test a flag value
-//     // this is repeated elsewhere 
-
-//     var participantCount = -1;
-
-//     // HIDEOUS! But quick ;)
-//     // survey or experiment, independent, balanced, two-tailed t-test
-//     if((selections["method"] == "survey" || selections["method"] == "experiment")&& selections["test"] == "T-test" &&
-//         selections["independence"] == "independent" && selections["balance"] == "balance-yes"
-//         && (selections["tails"] == "two-tail" || selections["tails"] == "one-tail")){
-//             console.log("calling function!")
-//             participantCount = calculateIndependentBalancedTtest(powerMetrics["effect-size"], powerMetrics["alpha"], powerMetrics["power"], selections["tails"]);
-//         }
-
-
-
-
+// LEAVING THIS HERE SO I CAN ADD BACK IN THE EXPORT FUNCTION AT SOME POINT
 
 //     var participantField = document.getElementById("participant-num");
 
@@ -269,49 +171,6 @@ function exportLog(clickEvent){
 // document.getElementById("export-log").addEventListener("click",exportLog);
 
 
-
-// function fieldBlur(event){
-
-//     var inputField = event.target.id;
-//     var inputValue = event.target.value;
-//     var invalidValue = false;
-//     document.getElementById("participant-num").innerHTML = "";
-//     if(isNaN(inputValue)){
-//         document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number."
-//         invalidValue = true;
-//     }
-//     if(inputField == "effect-size"){
-//         console.log("in effect size blur")
-//         if(inputValue < 0.2 || inputValue > 0.8){
-//             document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number between 0.2 and 0.8"
-//             invalidValue = true;
-//         }
-//     }
-//     if(inputField == "alpha"){
-//         if(inputValue < 0.001 || inputValue > 0.1){
-//             document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number between 0.1 and 0.001"
-//             invalidValue = true;
-//         }
-//     }
-//     if(inputField == "power"){
-//         if(inputValue < 0.5 || inputValue > 0.99){
-//             document.getElementById(inputField+"-feedback").innerHTML = "Value must be a number between 0.50 and 0.99"
-//             invalidValue = true;
-//         }
-//     }
-
-//     var calculateButton = document.getElementById("calculate-participants");
-//     if(invalidValue){
-//         calculateButton.disabled = true;
-//     }else{
-//         powerMetrics[inputField] = inputValue;
-//         // calculateButton.disabled = false;
-//     }
-
-// }
-
-
-
 function optionOver(event){
     event.target.classList.add("option-over");
 }
@@ -341,12 +200,16 @@ function optionClick(event){
     event.target.classList.add("option-over");
     event.target.setAttribute("data-selected", "true");
 
-
+    // this is where we're setting the values for the "selections" list, but probably should move this
     selections[containingList] = event.target.id;
     // need to customize the wrapper ID so that I can have a separate one for the ANOVA test later on
     // this will only work for T-test at the moment
     if(event.target.id == "T-test"){
         document.getElementsByClassName("wrapper")[0].classList.add("is-open");
+    }
+    if(containingList == "tails"){
+        // so here, we'll update our hidden form field because no AJAX yet
+        document.getElementById("tails_count").value = event.target.id;
     }
 
     // every time a click comes through, check whether we have enough data to move on to the
@@ -366,7 +229,7 @@ function checkSelections(){
     // one OR two-tailed
     if((selections["method"] == "survey" ||  selections["method"] == "experiment") && selections["test"] == "T-test" &&
         selections["independence"] == "independent" && selections["balance"] == "balance-yes"
-        && (selections["tails"] == "two-tail" || selections["tails"] == "one-tail")){
+        && (selections["tails"] == "two-sided" || selections["tails"] == "larger")){
             testButton.disabled = false;
         }
 

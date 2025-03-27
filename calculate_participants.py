@@ -10,11 +10,11 @@ import os
 
 
 
-def calculateParticipantCount(alpha="0.05", power="0.8", effect_size="0.5"):
+def calculateParticipantCount(alpha="0.05", power="0.8", effect_size="0.5", numTails="two-sided"):
 
     analysis_obj = smp.TTestIndPower()
 
-    participants_needed = analysis_obj.solve_power(effect_size=effect_size, power=power, alpha=alpha)
+    participants_needed = analysis_obj.solve_power(effect_size=effect_size, power=power, alpha=alpha, alternative=numTails)
     
     return participants_needed
 
