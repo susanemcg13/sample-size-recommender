@@ -54,8 +54,6 @@ if (current_url == "/calculate_participants"){
     powerMetrics["power"] = query_params.get('power_input');
     powerMetrics["num-participants"] = document.getElementById("participant-num").innerHTML;
 
-
-
     powerSlider.setValue(powerMetrics["power"]);
     document.getElementById("power").innerHTML = "Power: "+powerMetrics["power"];
     effectSlider.setValue(powerMetrics["effect-size"]);
@@ -189,6 +187,7 @@ function optionClick(event){
     // This means we can offload the work of determining when all the necessary selections have been made
     // to a separate function that will check every time something is clicked whether a button has been missed
     containingList = event.target.parentElement.id;
+    console.log("hi");
     parent_list = document.getElementById(containingList);
     if(parent_list){
         items_list = parent_list.getElementsByTagName("button");
@@ -200,17 +199,29 @@ function optionClick(event){
     event.target.classList.add("option-over");
     event.target.setAttribute("data-selected", "true");
 
+
+    console.log(containingList);
+    console.log(event.target.id);
     // this is where we're setting the values for the "selections" list, but probably should move this
-    selections[containingList] = event.target.id;
+    // OK, trying to move over to just using the form fields for data management. This might be a terrible idea but not sure why yet.
+    // Well, the query string is hideous but that's not unusual and at least it's readable
+    if (event.target.id != "start-button"){
+        var currentFormEntry = document.getElementById(containingList+"_value");
+        currentFormEntry.value = event.target.id;
+        selections[containingList] = event.target.id;
+    }
+   
+    
+
     // need to customize the wrapper ID so that I can have a separate one for the ANOVA test later on
     // this will only work for T-test at the moment
     if(event.target.id == "T-test"){
         document.getElementsByClassName("wrapper")[0].classList.add("is-open");
     }
-    if(containingList == "tails"){
-        // so here, we'll update our hidden form field because no AJAX yet
-        document.getElementById("tails_count").value = event.target.id;
-    }
+    // if(containingList == "tails"){
+    //     // so here, we'll update our hidden form field because no AJAX yet
+    //     document.getElementById("tails_value").value = event.target.id;
+    // }
 
     // every time a click comes through, check whether we have enough data to move on to the
     //calculation screen.
@@ -227,10 +238,14 @@ function checkSelections(){
     // independent
     // balanced
     // one OR two-tailed
+
+    // since we don't have default selections, it kind of makes sense to keep this vestigial piece
+    // but I should think of something better soon....
     if((selections["method"] == "survey" ||  selections["method"] == "experiment") && selections["test"] == "T-test" &&
         selections["independence"] == "independent" && selections["balance"] == "balance-yes"
         && (selections["tails"] == "two-sided" || selections["tails"] == "larger")){
             testButton.disabled = false;
+            console.log("can click now!");
         }
 
 }
