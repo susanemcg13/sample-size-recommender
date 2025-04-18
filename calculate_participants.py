@@ -19,6 +19,15 @@ def calculateParticipantCount(alpha="0.05", power="0.8", effect_size="0.5", numT
     return participants_needed
 
 
+def calculateDependentParticipantCount(alpha="0.05", power="0.8", effect_size="0.5", numTails="two-sided"):
+
+    analysis_obj = smp.TTestPower()
+
+    participants_needed = analysis_obj.solve_power(effect_size=effect_size, power=power, alpha=alpha, alternative=numTails)
+    
+    return participants_needed
+
+
 
 
 

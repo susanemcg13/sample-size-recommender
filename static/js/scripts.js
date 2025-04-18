@@ -242,7 +242,7 @@ function checkSelections(){
     // since we don't have default selections, it kind of makes sense to keep this vestigial piece
     // but I should think of something better soon....
     if((selections["method"] == "survey" ||  selections["method"] == "experiment") && selections["test"] == "T-test" &&
-        selections["independence"] == "independent" && selections["balance"] == "balance-yes"
+        (selections["independence"] == "independent" || selections["independence"] == "dependent") && selections["balance"] == "balance-yes"
         && (selections["tails"] == "two-sided" || selections["tails"] == "larger")){
             testButton.disabled = false;
             console.log("can click now!");
