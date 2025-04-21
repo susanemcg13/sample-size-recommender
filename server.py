@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from waitress import serve
-
+import math
 
 # have to import the functions we're using from our custom python files
 from calculate_participants import calculateParticipantCount
@@ -51,7 +51,7 @@ def get_participantCount():
     # This is actually where we're defining the variable names that will be available in "calculate.html"
     return render_template(
         "index.html",
-        num_participants = round(display_num)
+        num_participants = math.ceil(display_num)
     )
 
 
