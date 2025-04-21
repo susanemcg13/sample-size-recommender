@@ -15,6 +15,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route("/select") 
+def select(): 
+    return render_template('index.html')
 
 @app.route('/calculate_participants')
 def get_participantCount():
@@ -29,6 +32,7 @@ def get_participantCount():
     independence = request.args.get('independence_input')
     balance = request.args.get('balance_input')
 
+
     # Add some error handling here before passing the values along!
 
     if not user_alpha:
@@ -36,7 +40,6 @@ def get_participantCount():
     
     # so far we have only implemented the T-test
     if(testType == "T-test"):
-
         # shocker, this is for the independent T-test. Number of tails is passed
         if(independence == "independent"):
             display_num = calculateParticipantCount(float(user_alpha), float(user_power), float(user_effect), str(numTails))

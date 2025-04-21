@@ -1,7 +1,7 @@
 const queryString = window.location.search;
 const current_url = window.location.pathname;
-console.log(current_url); 
-console.log(queryString); // Output: "?param1=value1&param2=value2"
+// console.log(current_url); 
+// console.log(queryString); // Output: "?param1=value1&param2=value2"
 
 var powerMetrics = {
     "effect-size":"",
@@ -34,9 +34,21 @@ var selections = {
     "tails":""
 }
 
+if (current_url == "/select"){
+
+    // if we're back at the "select" stage, that means we just want to hide the homepage
+    // and the output page, right?
+    document.getElementById("landing-page").classList.add("hide-content");
+    document.getElementById("selection-page").classList.remove("hide-content");
+    document.getElementById("selection-crumb").classList.remove("hide-content");
+    document.getElementById("calculation-crumb").classList.add("hide-content");
+    document.getElementById("calculation-page").classList.add("hide-content");
+
+}
+
 
 if (current_url == "/calculate_participants"){
-    
+
     // this is hideous, but we'll worry about that once we know whether it works ;)
 
     // BAD BAD BAD!!!
@@ -61,6 +73,9 @@ if (current_url == "/calculate_participants"){
     document.getElementById("alpha_entry").value = powerMetrics["alpha"];
     document.getElementById("tails_value").value = query_params.get('tails_input');
 
+    document.getElementById("test_value").value = query_params.get('test_input');
+    document.getElementById("independence_value").value = query_params.get('independence_input');
+    document.getElementById("balance_value").value = query_params.get('balance_input');
 
 
 
@@ -151,7 +166,6 @@ function showLog(){
 
 }
 
-// document.getElementById("calculate-participants").addEventListener("click", calculateParticipants);
 
 function exportLog(clickEvent){
     //solution pulled from here: https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
@@ -218,10 +232,6 @@ function optionClick(event){
     if(event.target.id == "T-test"){
         document.getElementsByClassName("wrapper")[0].classList.add("is-open");
     }
-    // if(containingList == "tails"){
-    //     // so here, we'll update our hidden form field because no AJAX yet
-    //     document.getElementById("tails_value").value = event.target.id;
-    // }
 
     // every time a click comes through, check whether we have enough data to move on to the
     //calculation screen.
