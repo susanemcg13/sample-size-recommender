@@ -1,7 +1,16 @@
 const queryString = window.location.search;
 const current_url = window.location.pathname;
+
+
+//var js_object = {{ parameters }}
 // console.log(current_url); 
 // console.log(queryString); // Output: "?param1=value1&param2=value2"
+
+
+function myFunc(vars){
+    console.log("did this error?");
+    console.log(vars);
+}
 
 var powerMetrics = {
     "effect-size":"",
@@ -26,13 +35,6 @@ var powerSlider = new Slider('#power_entry', {
 });
 powerSlider.on("change", powerUpdate);
 
-var selections = {
-    "method":"",
-    "test":"",
-    "independence":"",
-    "balance":"",
-    "tails":""
-}
 
 if (current_url == "/select"){
 
@@ -52,6 +54,7 @@ if (current_url == "/calculate_participants"){
     // this is hideous, but we'll worry about that once we know whether it works ;)
 
     // BAD BAD BAD!!!
+    console.log("Hi there")
     document.getElementById("landing-page").classList.add("hide-content");
     document.getElementById("selection-page").classList.add("hide-content");
     document.getElementById("selection-crumb").classList.remove("hide-content");
@@ -60,7 +63,12 @@ if (current_url == "/calculate_participants"){
 
     // make sure to update the values of the metrics from the query string here
 
+//tails_input=&test_input=&method_input=&independence_input=&balance_input=&ANOVA_independence_input=&ANOVA_groups_input=
+// &ANOVA_m_input=
+
+
     query_params = new URLSearchParams(queryString);
+    console.log(query_params)
     powerMetrics["effect-size"] = query_params.get('effect_input');
     powerMetrics["alpha"] = query_params.get('alpha_input');
     powerMetrics["power"] = query_params.get('power_input');
@@ -73,11 +81,27 @@ if (current_url == "/calculate_participants"){
     document.getElementById("alpha_entry").value = powerMetrics["alpha"];
     document.getElementById("tails_value").value = query_params.get('tails_input');
 
+    // these are for T-tests
     document.getElementById("test_value").value = query_params.get('test_input');
     document.getElementById("independence_value").value = query_params.get('independence_input');
     document.getElementById("balance_value").value = query_params.get('balance_input');
 
+    // these are for ANOVAs
+    document.getElementById("ANOVA_groups_value").value = query_params.get('ANOVA_groups_input');
+    document.getElementById("ANOVA_independence_value").value = query_params.get('ANOVA_independence_input');
+    document.getElementById("ANOVA_m_value").value = query_params.get('ANOVA_m_input');
 
+    // console.log("in render")
+    // console.log(selections)
+
+    // here's where we very awkwardly show/hide things based on the test type
+    if(query_params.get('test_input') != "ANOVA"){
+        document.getElementById("count-per-level").classList.add('hide-content');
+        document.getElementById("count-per-group").classList.add('hide-content');
+    }else{
+        document.getElementById("count-per-level").classList.remove('hide-content');
+        document.getElementById("count-per-group").classList.remove('hide-content');        
+    }
 
 }
 
@@ -201,7 +225,6 @@ function optionClick(event){
     // This means we can offload the work of determining when all the necessary selections have been made
     // to a separate function that will check every time something is clicked whether a button has been missed
     containingList = event.target.parentElement.id;
-    console.log("hi");
     parent_list = document.getElementById(containingList);
     if(parent_list){
         items_list = parent_list.getElementsByTagName("button");
@@ -210,28 +233,56 @@ function optionClick(event){
             items_list[i].setAttribute("data-selected", "false");
         }
     }
+
     event.target.classList.add("option-over");
     event.target.setAttribute("data-selected", "true");
 
-
-    console.log(containingList);
-    console.log(event.target.id);
-    // this is where we're setting the values for the "selections" list, but probably should move this
-    // OK, trying to move over to just using the form fields for data management. This might be a terrible idea but not sure why yet.
     // Well, the query string is hideous but that's not unusual and at least it's readable
     if (event.target.id != "start-button"){
-        var currentFormEntry = document.getElementById(containingList+"_value");
-        currentFormEntry.value = event.target.id;
-        selections[containingList] = event.target.id;
+        var currentFormEntry;
+        // console.log(containingList);
+        if(containingList == "ANOVA_independent_groups"){
+            currentFormEntry = document.getElementById("ANOVA_groups_value");
+            currentFormEntry.value = event.target.value;
+        }else if(containingList == "ANOVA_dependent_groups"){
+                currentFormEntry = document.getElementById("ANOVA_groups_value");
+                currentFormEntry.value = event.target.value;
+        }else if(containingList == "ANOVA_m_per_group"){
+                currentFormEntry = document.getElementById("ANOVA_m_value");
+                currentFormEntry.value = event.target.value;          
+        }else{
+            currentFormEntry = document.getElementById(containingList+"_value");
+            currentFormEntry.value = event.target.id;
+        }
+        
     }
    
     
 
     // need to customize the wrapper ID so that I can have a separate one for the ANOVA test later on
     // this will only work for T-test at the moment
+
     if(event.target.id == "T-test"){
-        document.getElementsByClassName("wrapper")[0].classList.add("is-open");
+        document.getElementsByClassName("wrapper1")[0].classList.add("is-open");
+        document.getElementsByClassName("wrapper2")[0].classList.remove("is-open");
+        document.getElementById("ANOVA_independent_groups").classList.add("hide-content");
     }
+    if(event.target.id == "ANOVA"){
+        document.getElementsByClassName("wrapper2")[0].classList.add("is-open");
+        document.getElementsByClassName("wrapper1")[0].classList.remove("is-open");
+        document.getElementById("ANOVA_independent_groups").classList.add("hide-content");
+    }
+    if(event.target.id == "ANOVA_independent"){
+        document.getElementById("ANOVA_independent_groups").classList.remove("hide-content");
+    }
+    if(event.target.id == "ANOVA_dependent"){
+        document.getElementById("ANOVA_dependent_groups").classList.remove("hide-content");
+        document.getElementById("ANOVA_m_per_group").classList.remove("hide-content");
+        document.getElementById("ANOVA_independent_groups").classList.add("hide-content");
+    }
+
+    console.log("Checking target name:")
+    console.log(event.target.id)
 
     // every time a click comes through, check whether we have enough data to move on to the
     //calculation screen.
@@ -242,21 +293,41 @@ function checkSelections(){
 
     var testButton = document.getElementById("submit-test-info");
 
-    // WOW, so much repeated code
-    // currently allowing survey OR experiment
-    // T-test
-    // independent
-    // balanced
-    // one OR two-tailed
+    // we're now just storing everything in our invisible form, which seems to be working for now
 
-    // since we don't have default selections, it kind of makes sense to keep this vestigial piece
-    // but I should think of something better soon....
-    if((selections["method"] == "survey" ||  selections["method"] == "experiment") && selections["test"] == "T-test" &&
-        (selections["independence"] == "independent" || selections["independence"] == "dependent") && selections["balance"] == "balance-yes"
-        && (selections["tails"] == "two-sided" || selections["tails"] == "larger")){
+    // IF WE ARE DOING A T-TEST
+    if((document.getElementById('method_value').value == "survey" ||  document.getElementById('method_value').value == "experiment") && document.getElementById('test_value').value == "T-test" ){
+        // we are doing a T-test, so we need *something" for independence, balance and tails
+        if(document.getElementById('independence_value').value != "" && document.getElementById('balance_value').value != "" && document.getElementById('tails_value').value != ""){
             testButton.disabled = false;
             console.log("can click now!");
         }
+    }
+
+    // IF WE ARE DOING A SURVEY ANOVA
+        // Here's the options we've outlined for One-way ANOVA:
+        // Independent (between subjects) vs Dependent (within subjects)
+        // Always balanced, always "two-tailed" (non-directional)
+    if(document.getElementById('method_value').value == "survey" && document.getElementById('test_value').value == "ANOVA" ){
+        // we are doing a survey ANOVA
+        console.log("checking here");
+        if(document.getElementById('ANOVA_independence_value').value == "ANOVA_independent" && document.getElementById("ANOVA_groups_value").value != ""){
+           // in this case, we're doing an independent ANOVA and we have the number of levels/groups
+            testButton.disabled = false;
+            console.log("we have this many levels/groups");
+            console.log(document.getElementById("ANOVA_groups_value").value);
+            console.log("Now we just a server function to process these results");
+        }
+        if(document.getElementById('ANOVA_independence_value').value == "ANOVA_dependent" && document.getElementById("ANOVA_groups_value").value != "" && document.getElementById("ANOVA_m_value").value != ""){
+            // in this case, we're doing an independent ANOVA and we have the number of levels/groups
+             testButton.disabled = false;
+             console.log("looks like we're doing a dependent ANOVA");
+             console.log(document.getElementById("ANOVA_groups_value").value);
+             console.log("Now we just a server function to process these results");
+         }
+
+    }
+
 
 }
 

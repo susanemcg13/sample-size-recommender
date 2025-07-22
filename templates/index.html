@@ -99,7 +99,7 @@ TODO (in no particular order)
     <div class="px-4 py-5 my-5 text-center" id="landing-page">
       <h1 class="display-5 fw-bold text-body-emphasis">Get a Sample Size Recommendation</h1>
       <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Built by researchers specializing in study design, privacy, and usability, this tool will
+        <p class="lead mb-4">WHAT Built by researchers specializing in study design, privacy, and usability, this tool will
           help you decide what sample size is right for your study.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="start-button">Get started</button>
@@ -118,17 +118,6 @@ TODO (in no particular order)
             <li>
               <div>
                 Which method best describes your overall study?
-                <!-- ? and ! icons on hold-->
-                <!-- <a>
-                  <svg class="question-svg-align">
-                    <use xlink:href="#question-mark"></use>
-                  </svg>
-                </a>
-                <a>
-                  <svg class="info-svg-align">
-                    <use xlink:href="#info-circle"></use>
-                  </svg>
-                </a> -->
               </div>
               <div class="list-group" id="method">
                 <button type="button" class="list-group-item list-group-item-action" id="survey" data-selected="false">
@@ -142,39 +131,22 @@ TODO (in no particular order)
                   data-selected="false" disabled>
                   Interview <i>Not yet available</i>
                 </button>
-                <!-- <span class="d-inline-block" tabindex="0" data-placement="right" data-toggle="tooltip" title="Disabled tooltip">
-                  <button type="button" class="list-group-item list-group-item-action" id="method-interview" disabled>
-                    C. Interview <i>Not yet available</i>
-                  </button>
-                </span> -->
 
               </div>
             </li>
-
-
 
             <!-- TESTS-->
             <li>
               <div>
                 Which statistical test do you need a sample size for?
-                <!-- ? and ! icons on hold-->
-                <!-- <a>
-                  <svg class="question-svg-align">
-                    <use xlink:href="#question-mark"></use>
-                  </svg>
-                </a>
-                <a>
-                  <svg class="info-svg-align">
-                    <use xlink:href="#info-circle"></use>
-                  </svg>
-                </a> -->
               </div>
               <div class="list-group" id="test">
                 <button type="button" class="list-group-item list-group-item-action" id="T-test" data-selected="false">
                   T-test
                 </button>
-                <button type="button" class="list-group-item list-group-item-action" id="ANOVA" data-selected="false"
-                  disabled>ANOVA <i>Not yet available</i></button>
+                <button type="button" class="list-group-item list-group-item-action" id="ANOVA" data-selected="false">
+                  ANOVA
+                </button>
                 <button type="button" class="list-group-item list-group-item-action" id="other" data-selected="false"
                   disabled>Other <i>Not yet available</i> </button>
 
@@ -182,9 +154,9 @@ TODO (in no particular order)
             </li>
 
             <!--ITEM REVEAL ON T-TEST CLICK-->
-            <div class="wrapper">
+            <div class="wrapper1">
 
-              <div class="inner">
+              <div class="inner" id="Ttest-options">
                 <!-- INDEPENDENCE -->
                 <li>
                   <div>
@@ -244,10 +216,63 @@ TODO (in no particular order)
               </div>
 
             </div>
+            <!--ITEM REVEAL ON ANOVA CLICK-->
+            <div class="wrapper2">
+              <div class="inner" id="ANOVA-options">
+                <!-- INDEPENDENCE -->
+                  <div>
+                    2. A. What type of ANOVA will you use?
+                  </div>
+                  <div class="list-group" id="ANOVA_independence">
+                    <button type="button" class="list-group-item list-group-item-action" id="ANOVA_independent"
+                      data-selected="false">
+                      Between subjects ANOVA
+
+                      <div class="hide-content" id="ANOVA_independent_groups">
+                        Number of groups:
+                      <select class="selectpicker" id="groups_num_independent" data-none-selected-text="None">
+                        <option id="two_groups">2</option>
+                        <option id="three_groups">3</option>
+                        <option id="four_groups">4</option>
+                      </select>
+                    </div>
+
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" id="ANOVA_dependent"
+                      data-selected="false">Within subjects ANOVA
+                    
+                      <div class="hide-content" id="ANOVA_dependent_groups">
+                        Number of groups:
+                      <select class="selectpicker" id="groups_num_dependent" data-none-selected-text="None">
+                        <option id="two_groups">2</option>
+                        <option id="three_groups">3</option>
+                        <option id="four_groups">4</option>
+                      </select>
+                    </div>
+
+                    <div class="hide-content" id="ANOVA_m_per_group">
+                      Measurements/group:
+                    <select class="selectpicker" id="measures_per_group" data-none-selected-text="None">
+                      <option id="two_groups">2</option>
+                      <option id="three_groups">3</option>
+                      <option id="four_groups">4</option>
+                    </select>
+                  </div>
+                    
+                    
+                    
+                    </button>
+                  </div>
+                
+
+                </div>
+
+            </div>
 
           </ol>
-
+        
         </div>
+      </div>
         <div class=".col-6"></div>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3" id="submit-test-info" disabled>Next</button>
@@ -260,7 +285,7 @@ TODO (in no particular order)
     <div class="container hide-content" id="calculation-page">
       <div class="row">
         <div class="col-12" id="selections-status">
-
+          {{selection_values}}
         </div>
 
       </div>
@@ -270,11 +295,14 @@ TODO (in no particular order)
       <form id="calc_parameters" action="/calculate_participants" method="get">
 
         <!-- THIS IS A LAZY LAZY HACK!!! -->
-        <input type="text" name="tails_input" id="tails_value" class="hide-content" value="two-sided"/>
-        <input type="text" name="test_input" id="test_value" class="hide-content" value="T-test"/>
-        <input type="text" name="method_input" id="method_value" class="hide-content" value="T-test"/>
-        <input type="text" name="independence_input" id="independence_value" class="hide-content" value="two-sided"/>
-        <input type="text" name="balance_input" id="balance_value" class="hide-content" value="two-sided"/>
+        <input type="text" name="tails_input" id="tails_value" class="hide-content" value=""/>
+        <input type="text" name="test_input" id="test_value" class="hide-content" value=""/>
+        <input type="text" name="method_input" id="method_value" class="hide-content" value=""/>
+        <input type="text" name="independence_input" id="independence_value" class="hide-content" value=""/>
+        <input type="text" name="balance_input" id="balance_value" class="hide-content" value=""/>
+        <input type="text" name="ANOVA_independence_input" id="ANOVA_independence_value" class="hide-content" value=""/>
+        <input type="text" name="ANOVA_groups_input" id="ANOVA_groups_value" class="hide-content" value=""/>
+        <input type="text" name="ANOVA_m_input" id="ANOVA_m_value" class="hide-content" value=""/>
         <div class="row">
 
 
@@ -306,16 +334,11 @@ TODO (in no particular order)
       </form>
         <!-- PARTICIPANT COUNT ROW START -->
 
-        <div class="row">
-          <div class="col-4"></div>
-          <div class="col-4" id="count-label">Participant count</div>
-          <div class="col-4"></div>
-        </div>
-
-        <div class="row">
-          <div class="col-4"></div>
-          <div class="col-4" id="participant-num">{{num_participants}}</div>
-          <div class="col-4"></div>
+        <div class="row results">
+          <div class="col-4" id="total-count">Total participant count: {{num_participants}}</div>
+          <div class="hide-content" id="participant-num">{{num_participants}}</div>
+          <div class="col-4" id="count-per-level">Participants per level: {{participants_per_level}}</div>
+          <div class="col-4" id="count-per-group">Participants per group: {{participants_per_level}}</div>
         </div>
 
         <!-- PARTICIPANT COUNT ROW END -->
@@ -355,8 +378,6 @@ TODO (in no particular order)
     <!-- EXPORT LOG BUTTON END -->
 
     </div>
-
-
   </main>
 
   <!-- JS INCLUDES -->
@@ -368,15 +389,22 @@ TODO (in no particular order)
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js.download')}}"></script>
 
   <!-- JSTAT -->
-  <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script> -->
+
+
   <!-- BOOTSTRAP SLIDER -->
   <!-- from https://seiyria.com/bootstrap-slider/ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"></script>
 
+
+
   <!-- CUSTOM SCRIPTS -->
   <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
-  <!-- <script src="js/scripts.js"></script> -->
 
+  <script type="text/javascript">
+    console.log("hi there");
+    myVar = myFunc({{selections|tojson}});
+  </script>
 
 </body>
 
