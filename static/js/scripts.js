@@ -54,7 +54,6 @@ if (current_url == "/calculate_participants"){
     // this is hideous, but we'll worry about that once we know whether it works ;)
 
     // BAD BAD BAD!!!
-    console.log("Hi there")
     document.getElementById("landing-page").classList.add("hide-content");
     document.getElementById("selection-page").classList.add("hide-content");
     document.getElementById("selection-crumb").classList.remove("hide-content");
@@ -228,12 +227,43 @@ function optionClick(event){
 
     containingList = event.target.parentElement.id;
     parent_list = document.getElementById(containingList);
+
+
+    console.log("Checking target name:")
+    console.log(event.target.id)
+
+    // OK, so e.g. containingList will be "method" and event.target.id will be "survey"
+
     if(parent_list){
+        // So in this case, I'm looping through all the buttons in the parent list. 
+        
         items_list = parent_list.getElementsByTagName("button");
         for (i=0; i<items_list.length; i++){
             items_list[i].classList.remove("option-over");
             items_list[i].setAttribute("data-selected", "false");
         }
+
+        // Looping through all option-specific helper text also
+        console.log(containingList)
+        helper_div = document.getElementById(containingList+"-helper");
+        
+
+        //first hide all the helper-box elements
+        helper_boxes = document.getElementsByClassName('helper-box');
+        for (i=0; i<helper_boxes.length; i++){
+            helper_boxes[i].classList.add("hide-content");
+        }
+
+        //remove the "hide-content" on the main helper div
+        helper_div.classList.remove("hide-content");
+        
+        helper_bubbles = helper_div.getElementsByClassName("option-help");
+        for (i=0; i<helper_bubbles.length; i++){
+            helper_bubbles[i].classList.add("hide-content");
+        }
+
+        //...and now that we've hidden all the support text, we'll show it again because *something* was clicked
+        document.getElementById(event.target.id+"-info").classList.remove("hide-content");
     }
 
     event.target.classList.add("option-over");
@@ -284,13 +314,6 @@ function optionClick(event){
     }
 
 
-
-    console.log("Checking target name:")
-    console.log(event.target.id)
-
-    // OK, so e.g. containingList will be "method" and event.target.id will be "survey"
-
-    
 
     // every time a click comes through, check whether we have enough data to move on to the
     //calculation screen.

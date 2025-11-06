@@ -13,7 +13,9 @@ ul {
 .wrapper1.is-open {
   grid-template-rows: 1fr;
 }
+.option-help{
 
+}
 .wrapper2 {
   display: grid;
   grid-template-rows: 0fr;

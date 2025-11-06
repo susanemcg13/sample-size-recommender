@@ -91,10 +91,6 @@
 + Statefulness via js variables
 
 TODO (in no particular order)
-
-1. Implement "back" functionality with maintained selection/output history
-
-
  --OVERVIEW -->
 
 
@@ -115,9 +111,12 @@ TODO (in no particular order)
     <!-- SELECTION PAGE CONTENT  START-->
     <div class="container hide-content" id="selection-page">
       <div class="row">
-        <div class="col-6">
+        <div class="col-12">
+          <!-- METHODS -->
+          <div class="row">
+            <div class="col-6">
 
-            <!-- METHODS-->
+              <!-- METHODS OPTIONS -->
 
               <div>
                 Which method best describes your overall study?
@@ -138,10 +137,44 @@ TODO (in no particular order)
                   data-selected="false" disabled>
                   Skip this step
                 </button>
-
               </div>
+              <!-- END METHODS OPTIONS -->
+            </div>
 
-            <!-- TESTS-->
+            <!-- METHODS HELPER TEXT -->
+            <div class="col-6 helper-box hide-content" id="method-helper">
+              <!-- OVERALL METHOD INFO -->
+              <div id="method-info" class="alert alert-primary d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                  <use xlink:href="#info-fill" />
+                </svg>
+                <div>
+                  You don't need to know your full study method to get a sample size, but sharing it helps us tailor
+                  recommendations.
+                </div>
+              </div>
+              <!-- END OVERALL METHOD INFO -->
+              <!-- SURVEY METHOD INFO -->
+              <div id="survey-info" class="option-help hide-content">
+
+                Here's some survey method text.
+              </div>
+              <!-- END SURVEY METHOD INFO -->
+              <!-- EXPERIMENT METHOD INFO -->
+              <div id="experiment-info" class="option-help hide-content">
+
+                Here's some experiment method text.
+              </div>
+              <!-- END EXPERIMENT METHOD INFO -->
+
+              <!-- END METHODS HELPER TEXT -->
+            </div>
+            <!-- END METHODS ROW -->
+          </div>
+
+          <!-- TESTS-->
+          <div class="row">
+            <div class="col-6">
               <div>
                 Which statistical test do you need a sample size for?
               </div>
@@ -156,12 +189,41 @@ TODO (in no particular order)
                   disabled>More options coming soon!</button>
 
               </div>
+            </div>
+            <!-- TEST HELPER TEXT -->
+            <div class="col-6 helper-box hide-content" id="test-helper">
+              <!-- OVERALL TEST INFO -->
+              <div id="test-info" class="alert alert-primary d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                  <use xlink:href="#info-fill" />
+                </svg>
+                <div>
+                  This is about tests.
+                </div>
+              </div>
+              <!-- END OVERALL TEST INFO -->
+              <!-- TTEST INFO -->
+              <div id="T-test-info" class="option-help hide-content">
 
-            <!--ITEM REVEAL ON T-TEST CLICK-->
-            <div class="wrapper1">
+                Here's some ttest method text.
+              </div>
+              <!-- END TTEST INFO -->
 
-              <div class="inner" id="Ttest-options">
-                <!-- INDEPENDENCE -->
+              <!-- END TEST HELPER TEXT -->
+            </div>
+            <!-- END TEST ROW -->
+          </div>
+
+          <!--ITEM REVEAL ON T-TEST CLICK-->
+          <div class="wrapper1">
+
+            <div class="inner" id="Ttest-options">
+
+
+              <!-- INDEPENDENCE -->
+              <div class="row">
+                <div class="col-6">
+
                   <div>
                     What type of t-test will you use?
                   </div>
@@ -173,20 +235,41 @@ TODO (in no particular order)
                     <button type="button" class="list-group-item list-group-item-action" id="dependent"
                       data-selected="false">Dependent samples t-test</button>
                   </div>
-                <!-- BALANCE -->
+                </div>
+                <!-- INDEPENDENCE HELPER TEXT -->
+                <div class="col-6 helper-box hide-content" id="independence-helper">
+                  <!-- OVERALL INDEPENDENCE INFO -->
+                  <div id="independence-info" class="alert alert-primary d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                      <use xlink:href="#info-fill" />
+                    </svg>
+                    <div>
+                      This is about independence.
+                    </div>
+                  </div>
+                  <!-- END OVERALL INDEPENDENCE INFO -->
+                  <!-- INDEPENDENCE HELPER TEXT -->
+                  <div id="independent-info" class="option-help hide-content">
+
+                    Here's some independent samples text.
+                  </div>
+                  <div id="dependent-info" class="option-help hide-content">
+
+                    Here's some dependent samples text.
+                  </div>
+
+                  <!-- END INDEPENDENCE HELPER TEXT -->
+                </div>
+              </div>
+
+
+
+
+              <!-- BALANCE -->
+              <div class="row">
+                <div class="col-6">
                   <div>
                     Will you recruit an equal number of people for the two groups you are comparing?
-                    <!-- ? and ! icons on hold-->
-                    <!-- <a>
-                      <svg class="question-svg-align">
-                        <use xlink:href="#question-mark"></use>
-                      </svg>
-                    </a>
-                    <a>
-                      <svg class="info-svg-align">
-                        <use xlink:href="#info-circle"></use>
-                      </svg>
-                    </a> -->
                   </div>
                   <div class="list-group" id="balance">
                     <button type="button" class="list-group-item list-group-item-action" id="balance-yes"
@@ -198,7 +281,47 @@ TODO (in no particular order)
                       data-selected="false" disabled>No, there will be a different number of participants in each
                       group (e.g., 15 students, 10 teachers).</button>
                   </div>
-                <!-- ONE VS. TWO-TAILED -->
+
+                </div>
+
+                <!-- BALANCE HELPER TEXT -->
+                <div class="col-6 helper-box hide-content" id="balance-helper">
+                  <!-- OVERALL BALANCE INFO -->
+                  <div id="balance-info" class="alert alert-primary d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                      <use xlink:href="#info-fill" />
+                    </svg>
+                    <div>
+                      This is about balance.
+                    </div>
+                  </div>
+                  <!-- END OVERALL BALANCE INFO -->
+                  <!-- NALANCE HELPER TEXT -->
+                  <div id="balance-yes-info" class="option-help hide-content">
+
+                    Here's some balanced samples text.
+                  </div>
+                  <div id="balance-no-info" class="option-help hide-content">
+
+                    Here's some unbalanced samples text.
+                  </div>
+
+                  <!-- END BALANCE HELPER TEXT -->
+                </div>
+
+
+
+              </div>
+
+
+
+
+
+
+              <!-- ONE VS. TWO-TAILED -->
+
+              <div class="row">
+                <div class="col-6">
                   <div>
                     Will you use the standard two-tailed t-test?
                   </div>
@@ -213,75 +336,111 @@ TODO (in no particular order)
                       <b>only</b>) so I am using a one-tailed test.</button>
                   </div>
 
-              </div>
-
-            </div>
-            <!--ITEM REVEAL ON ANOVA CLICK-->
-            <div class="wrapper2">
-              <div class="inner" id="ANOVA-options">
-                <!-- INDEPENDENCE -->
-                <div>
-                  What type of ANOVA will you use?
                 </div>
-                <div class="list-group" id="ANOVA_independence">
-                  <button type="button" class="list-group-item list-group-item-action" id="ANOVA_independent"
-                    data-selected="false">
-                    Between subjects ANOVA
 
-                    <div class="hide-content" id="ANOVA_independent_groups">
-                      Number of groups:
-                      <select class="selectpicker" id="groups_num_independent" data-none-selected-text="None">
-                        <option id="two_groups">2</option>
-                        <option id="three_groups">3</option>
-                        <option id="four_groups">4</option>
-                      </select>
+                <!-- TAILS HELPER TEXT -->
+                <div class="col-6 helper-box hide-content" id="tails-helper">
+                  <!-- OVERALL TAILS INFO -->
+                  <div id="tails-info" class="alert alert-primary d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                      <use xlink:href="#info-fill" />
+                    </svg>
+                    <div>
+                      This is about tails.
                     </div>
+                  </div>
+                  <!-- END OVERALL TAILS INFO -->
+                  <!-- TAILS HELPER TEXT -->
+                  <div id="two-sided-info" class="option-help hide-content">
 
-                  </button>
-                  <button type="button" class="list-group-item list-group-item-action" id="ANOVA_dependent"
-                    data-selected="false">Within subjects ANOVA
+                    Here's some two-tailed text.
+                  </div>
+                  <div id="larger-info" class="option-help hide-content">
 
-                    <div class="hide-content" id="ANOVA_dependent_groups">
-                      Number of groups:
-                      <select class="selectpicker" id="groups_num_dependent" data-none-selected-text="None">
-                        <option id="two_groups">2</option>
-                        <option id="three_groups">3</option>
-                        <option id="four_groups">4</option>
-                      </select>
-                    </div>
+                    Here's some one-tailed text.
+                  </div>
 
-                    <div class="hide-content" id="ANOVA_m_per_group">
-                      Measurements/group:
-                      <select class="selectpicker" id="measures_per_group" data-none-selected-text="None">
-                        <option id="two_groups">2</option>
-                        <option id="three_groups">3</option>
-                        <option id="four_groups">4</option>
-                      </select>
-                    </div>
-
-
-
-                  </button>
+                  <!-- END TAILS HELPER TEXT -->
                 </div>
+
+
 
 
               </div>
 
+
+
+
             </div>
+
+          </div>
+          <!--ITEM REVEAL ON ANOVA CLICK-->
+          <div class="wrapper2">
+            <div class="inner" id="ANOVA-options">
+              <!-- INDEPENDENCE -->
+              <div>
+                What type of ANOVA will you use?
+              </div>
+              <div class="list-group" id="ANOVA_independence">
+                <button type="button" class="list-group-item list-group-item-action" id="ANOVA_independent"
+                  data-selected="false">
+                  Between subjects ANOVA
+
+                  <div class="hide-content" id="ANOVA_independent_groups">
+                    Number of groups:
+                    <select class="selectpicker" id="groups_num_independent" data-none-selected-text="None">
+                      <option id="two_groups">2</option>
+                      <option id="three_groups">3</option>
+                      <option id="four_groups">4</option>
+                    </select>
+                  </div>
+
+                </button>
+                <button type="button" class="list-group-item list-group-item-action" id="ANOVA_dependent"
+                  data-selected="false">Within subjects ANOVA
+
+                  <div class="hide-content" id="ANOVA_dependent_groups">
+                    Number of groups:
+                    <select class="selectpicker" id="groups_num_dependent" data-none-selected-text="None">
+                      <option id="two_groups">2</option>
+                      <option id="three_groups">3</option>
+                      <option id="four_groups">4</option>
+                    </select>
+                  </div>
+
+                  <div class="hide-content" id="ANOVA_m_per_group">
+                    Measurements/group:
+                    <select class="selectpicker" id="measures_per_group" data-none-selected-text="None">
+                      <option id="two_groups">2</option>
+                      <option id="three_groups">3</option>
+                      <option id="four_groups">4</option>
+                    </select>
+                  </div>
+
+                </button>
+              </div>
+
+
+            </div>
+
+          </div>
 
 
 
         </div>
+        <!-- END OVERALL SELECTIONS GROUP -->
       </div>
-      <div class=".col-6"></div>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3" id="submit-test-info"
-          disabled>Next</button>
-      </div>
-    </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3" id="submit-test-info"
+              disabled>Next</button>
+          </div>
+
+        </div>
 
 
-    </div>
+      </div>
 
     </div>
     <!-- METHODS PAGE END-->
@@ -294,8 +453,6 @@ TODO (in no particular order)
         </div>
 
       </div>
-
-
 
       <form id="calc_parameters" action="/calculate_participants" method="get">
 
