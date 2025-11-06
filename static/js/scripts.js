@@ -224,6 +224,8 @@ function optionClick(event){
     // the line below records or overwrites each value as it's added.
     // This means we can offload the work of determining when all the necessary selections have been made
     // to a separate function that will check every time something is clicked whether a button has been missed
+
+
     containingList = event.target.parentElement.id;
     parent_list = document.getElementById(containingList);
     if(parent_list){
@@ -281,8 +283,14 @@ function optionClick(event){
         document.getElementById("ANOVA_independent_groups").classList.add("hide-content");
     }
 
+
+
     console.log("Checking target name:")
     console.log(event.target.id)
+
+    // OK, so e.g. containingList will be "method" and event.target.id will be "survey"
+
+    
 
     // every time a click comes through, check whether we have enough data to move on to the
     //calculation screen.
