@@ -99,9 +99,19 @@ TODO (in no particular order)
     <div class="px-4 py-5 my-5 text-center" id="landing-page">
       <h1 class="display-5 fw-bold text-body-emphasis">Get a Sample Size Recommendation</h1>
       <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">WHAT Built by researchers specializing in study design, privacy, and usability, this tool
-          will
-          help you decide what sample size is right for your study.</p>
+        <p class="lead mb-4">Built by researchers specializing in study design, privacy, and usability, this tool
+          will help you decide what sample size is right for your study.</p>
+        <div class="alert alert-primary d-flex align-items-center" role="alert">
+          Tell us the statistical test you plan to use (e.g.,t-test, ANOVA), and we'll walk you through a few
+          multiple-choice questions.
+          Then we'll calculated teh sample size you need using power analysis (the math that helps determine the right
+          sample size for
+          statistically significant results). We'll offer tips and explanations to make it easier for you to make an
+          informed decision on what
+          sample size is optimal for your study, so you can start collecting data with confidence!
+
+
+        </div>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="start-button">Get started</button>
         </div>
@@ -118,7 +128,7 @@ TODO (in no particular order)
 
               <!-- METHODS OPTIONS -->
 
-              <div>
+              <div class="selection-question">
                 Which method best describes your overall study?
               </div>
               <div class="list-group" id="method">
@@ -149,19 +159,20 @@ TODO (in no particular order)
                   <use xlink:href="#info-fill" />
                 </svg>
                 <div>
-                  You don't need to know your full study method to get a sample size, but sharing it helps us tailor
-                  recommendations.
+                  You don’t need to know your full study method to get a sample size, but sharing it helps us tailor
+                  recommendations.<br />
+                  P.S. These blue boxes share tips from the experts that built this tool.
                 </div>
               </div>
               <!-- END OVERALL METHOD INFO -->
               <!-- SURVEY METHOD INFO -->
-              <div id="survey-info" class="option-help hide-content">
+              <div id="survey-info" class="option-help hide-content alert alert-warning">
 
                 Here's some survey method text.
               </div>
               <!-- END SURVEY METHOD INFO -->
               <!-- EXPERIMENT METHOD INFO -->
-              <div id="experiment-info" class="option-help hide-content">
+              <div id="experiment-info" class="option-help hide-content alert alert-warning">
 
                 Here's some experiment method text.
               </div>
@@ -172,47 +183,60 @@ TODO (in no particular order)
             <!-- END METHODS ROW -->
           </div>
 
-          <!-- TESTS-->
-          <div class="row">
-            <div class="col-6">
-              <div>
-                Which statistical test do you need a sample size for?
-              </div>
-              <div class="list-group" id="test">
-                <button type="button" class="list-group-item list-group-item-action" id="T-test" data-selected="false">
-                  T-test
-                </button>
-                <!-- <button type="button" class="list-group-item list-group-item-action" id="ANOVA" data-selected="false">
+          <div class="wrapper0">
+
+            <div class="inner" id="all-test-options">
+              <!-- TESTS-->
+              <div class="row">
+                <div class="col-6">
+                  <div class="selection-question">
+                    Which statistical test do you need a sample size for?
+                  </div>
+                  <div class="list-group" id="test">
+                    <button type="button" class="list-group-item list-group-item-action" id="T-test"
+                      data-selected="false">
+                      T-test
+                    </button>
+                    <!-- <button type="button" class="list-group-item list-group-item-action" id="ANOVA" data-selected="false">
                   ANOVA
                 </button> -->
-                <button type="button" class="list-group-item list-group-item-action" id="other" data-selected="false"
-                  disabled>More options coming soon!</button>
+                    <button type="button" class="list-group-item list-group-item-action" id="other"
+                      data-selected="false" disabled>More options coming soon!</button>
 
-              </div>
-            </div>
-            <!-- TEST HELPER TEXT -->
-            <div class="col-6 helper-box hide-content" id="test-helper">
-              <!-- OVERALL TEST INFO -->
-              <div id="test-info" class="alert alert-primary d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
-                  <use xlink:href="#info-fill" />
-                </svg>
-                <div>
-                  This is about tests.
+                  </div>
                 </div>
-              </div>
-              <!-- END OVERALL TEST INFO -->
-              <!-- TTEST INFO -->
-              <div id="T-test-info" class="option-help hide-content">
+                <!-- TEST HELPER TEXT -->
+                <div class="col-6 helper-box hide-content" id="test-helper">
+                  <!-- OVERALL TEST INFO -->
+                  <div id="test-info" class="alert alert-primary d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                      <use xlink:href="#info-fill" />
+                    </svg>
+                    <div>
+                      Different tests require different sample sizes.
+                      <br />
+                      Unsure? Pick the analysis you will use to answer your main research question or hypothesis so you
+                      can see what sample size you need for your core analysis.
+                    </div>
+                  </div>
+                  <!-- END OVERALL TEST INFO -->
+                  <!-- TTEST INFO -->
+                  <div id="T-test-info" class="option-help hide-content alert alert-warning">
 
-                Here's some ttest method text.
-              </div>
-              <!-- END TTEST INFO -->
+                    Here's some ttest method text.
+                  </div>
+                  <!-- END TTEST INFO -->
 
-              <!-- END TEST HELPER TEXT -->
+                  <!-- END TEST HELPER TEXT -->
+                </div>
+                <!-- END TEST ROW -->
+              </div>
+
             </div>
-            <!-- END TEST ROW -->
           </div>
+
+
+
 
           <!--ITEM REVEAL ON T-TEST CLICK-->
           <div class="wrapper1">
@@ -224,7 +248,7 @@ TODO (in no particular order)
               <div class="row">
                 <div class="col-6">
 
-                  <div>
+                  <div class="selection-question">
                     What type of t-test will you use?
                   </div>
                   <div class="list-group" id="independence">
@@ -244,16 +268,20 @@ TODO (in no particular order)
                       <use xlink:href="#info-fill" />
                     </svg>
                     <div>
-                      This is about independence.
+                      Independent = You are testing a difference between <b>two distinct groups</b> (e.g., older v.
+                      younger adults).<br />
+
+                      Dependent = You are testing <b>one group</b> of participants that has been measured twice (e.g.,
+                      pre/post tests) OR two groups made of <b>dependent pairs</b> (e.g., parent-child pairs, spouses).
                     </div>
                   </div>
                   <!-- END OVERALL INDEPENDENCE INFO -->
                   <!-- INDEPENDENCE HELPER TEXT -->
-                  <div id="independent-info" class="option-help hide-content">
+                  <div id="independent-info" class="option-help hide-content alert alert-warning">
 
                     Here's some independent samples text.
                   </div>
-                  <div id="dependent-info" class="option-help hide-content">
+                  <div id="dependent-info" class="option-help hide-content alert alert-warning">
 
                     Here's some dependent samples text.
                   </div>
@@ -268,7 +296,7 @@ TODO (in no particular order)
               <!-- BALANCE -->
               <div class="row">
                 <div class="col-6">
-                  <div>
+                  <div class="selection-question">
                     Will you recruit an equal number of people for the two groups you are comparing?
                   </div>
                   <div class="list-group" id="balance">
@@ -292,16 +320,19 @@ TODO (in no particular order)
                       <use xlink:href="#info-fill" />
                     </svg>
                     <div>
-                      This is about balance.
+                      Recruit similar numbers of people for each group to maximize your sample’s usefulness and avoid
+                      "wasted" data.<br />
+
+                      For t-tests, if groups are unbalanced, the smallest group sets the minimum sample size.
                     </div>
                   </div>
                   <!-- END OVERALL BALANCE INFO -->
                   <!-- NALANCE HELPER TEXT -->
-                  <div id="balance-yes-info" class="option-help hide-content">
+                  <div id="balance-yes-info" class="option-help hide-content alert alert-warning">
 
                     Here's some balanced samples text.
                   </div>
-                  <div id="balance-no-info" class="option-help hide-content">
+                  <div id="balance-no-info" class="option-help hide-content alert alert-warning">
 
                     Here's some unbalanced samples text.
                   </div>
@@ -322,7 +353,7 @@ TODO (in no particular order)
 
               <div class="row">
                 <div class="col-6">
-                  <div>
+                  <div class="selection-question">
                     Will you use the standard two-tailed t-test?
                   </div>
                   <div class="list-group" id="tails">
@@ -346,16 +377,20 @@ TODO (in no particular order)
                       <use xlink:href="#info-fill" />
                     </svg>
                     <div>
-                      This is about tails.
+                      Even for directional hypotheses (e.g., A &gt; B), we recommend a two-tailed test. They are easier
+                      to justify and more widely interpretable.<br />
+
+                      One-tailed tests are usually only necessary when you need to detect small effects in a specific
+                      direction, like in medical research.
                     </div>
                   </div>
                   <!-- END OVERALL TAILS INFO -->
                   <!-- TAILS HELPER TEXT -->
-                  <div id="two-sided-info" class="option-help hide-content">
+                  <div id="two-sided-info" class="option-help hide-content alert alert-warning">
 
                     Here's some two-tailed text.
                   </div>
-                  <div id="larger-info" class="option-help hide-content">
+                  <div id="larger-info" class="option-help hide-content alert alert-warning">
 
                     Here's some one-tailed text.
                   </div>
@@ -448,7 +483,7 @@ TODO (in no particular order)
     <!-- CALCULATION PAGE START-->
     <div class="container hide-content" id="calculation-page">
       <div class="row">
-        <div class="col-12" id="selections-status">
+        <div class="col-12 alert alert-secondary" id="selections-status">
           {{selection_values}}
         </div>
 
@@ -471,23 +506,23 @@ TODO (in no particular order)
 
           <!-- ALPHA -->
 
-          <div class="col-4">
-            <div>Alpha</div><br>
+          <div class="col-3">
+            <div>Alpha (p-value):</div><br>
             <input type="text" name="alpha_input" id="alpha_entry" placeholder="e.g. 0.05" value="0.05" /><br />
 
             <div id="alpha-feedback"></div>
           </div>
 
           <!-- EFFECT SIZE -->
-          <div class="col-4">
-            <div id="effect-size">Effect size: 0.5</div><br>
+          <div class="col-6">
+            <div id="effect-size"><b>Minimum Detectable Effect Size (Cohen's d):</b><br/> 0.5</div><br>
             <input type="text" name="effect_input" id="effect_entry" data-slider-id='ex1Slider' data-slider-min="0.2"
               data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" /><br />
             <div id="effect-size-feedback"></div>
           </div>
 
           <!-- POWER -->
-          <div class="col-4">
+          <div class="col-3">
             <div id="power">Power: 0.8</div><br>
             <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text"
               data-slider-min="0.5" data-slider-max="0.99" data-slider-step="0.01" data-slider-value="0.8" /><br />
@@ -511,7 +546,7 @@ TODO (in no particular order)
       <div class="row">
         <div class="col-12">
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
+            <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3">Calculate Sample Size</button>
           </div>
         </div>
 

@@ -74,9 +74,9 @@ if (current_url == "/calculate_participants"){
     powerMetrics["num-participants"] = document.getElementById("participant-num").innerHTML;
 
     powerSlider.setValue(powerMetrics["power"]);
-    document.getElementById("power").innerHTML = "Power: "+powerMetrics["power"];
+    document.getElementById("power").innerHTML = "Power:<br/>"+powerMetrics["power"];
     effectSlider.setValue(powerMetrics["effect-size"]);
-    document.getElementById("effect-size").innerHTML = "Effect size: "+powerMetrics["effect-size"];
+    document.getElementById("effect-size").innerHTML = "Minimum Detectable Effect Size (Cohen's d):<br/>"+powerMetrics["effect-size"];
     document.getElementById("alpha_entry").value = powerMetrics["alpha"];
     document.getElementById("tails_value").value = query_params.get('tails_input');
 
@@ -130,7 +130,7 @@ for (var i = 0; i < buttonsList.length; i++) {
 
 function effectUpdate(sliderValue){
     powerMetrics["effect-size"] = sliderValue.newValue;
-    document.getElementById("effect-size").innerHTML = "Effect size: "+sliderValue.newValue;
+    document.getElementById("effect-size").innerHTML = "Minimum Detectable Effect Size (Cohen's d):<br/>"+sliderValue.newValue;
 
 }
 
@@ -293,7 +293,9 @@ function optionClick(event){
 
     // need to customize the wrapper ID so that I can have a separate one for the ANOVA test later on
     // this will only work for T-test at the moment
-
+    if(event.target.id == "survey" || event.target.id == "experiment"){
+        document.getElementsByClassName("wrapper0")[0].classList.add("is-open");
+    }
     if(event.target.id == "T-test"){
         document.getElementsByClassName("wrapper1")[0].classList.add("is-open");
         document.getElementsByClassName("wrapper2")[0].classList.remove("is-open");
