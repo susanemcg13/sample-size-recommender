@@ -49,6 +49,7 @@ if (current_url == "/select"){
 }
 
 
+
 if (current_url == "/calculate_participants"){
 
     // this is hideous, but we'll worry about that once we know whether it works ;)
@@ -67,7 +68,7 @@ if (current_url == "/calculate_participants"){
 
 
     query_params = new URLSearchParams(queryString);
-    console.log(query_params)
+   // console.log(query_params)
     powerMetrics["effect-size"] = query_params.get('effect_input');
     powerMetrics["alpha"] = query_params.get('alpha_input');
     powerMetrics["power"] = query_params.get('power_input');
@@ -79,6 +80,7 @@ if (current_url == "/calculate_participants"){
     document.getElementById("effect-size").innerHTML = "Minimum Detectable Effect Size (Cohen's d):<br/>"+powerMetrics["effect-size"];
     document.getElementById("alpha_entry").value = powerMetrics["alpha"];
     document.getElementById("tails_value").value = query_params.get('tails_input');
+    document.getElementById("method_value").value = query_params.get('method_input');
 
     // these are for T-tests
     document.getElementById("test_value").value = query_params.get('test_input');

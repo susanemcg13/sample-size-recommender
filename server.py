@@ -7,6 +7,7 @@ from calculate_participants import calculateParticipantCount
 from calculate_participants import calculateDependentParticipantCount
 from calculate_participants import calculateIndependentANOVA
 from calculate_participants import calculateDependentANOVA
+from calculate_participants import formatSelectionString
 
 
 app = Flask(__name__)
@@ -32,6 +33,8 @@ def select():
     )
 
 @app.route('/calculate_participants')
+
+
 def get_participantCount():
     # This is where we're pulling values from the "index.html" form
     # Let's see if the args value matches the "name" or "id" value in the form input; I'm guessing the former
@@ -70,6 +73,9 @@ def get_participantCount():
 
     if not parameters["user_alpha"]:
         user_alpha = "0.05"
+        parameters["user_alpha"] = "0.05"
+
+    
     
     # so far we have only implemented the T-test
     if(parameters["testType"] == "T-test"):
@@ -101,13 +107,16 @@ def get_participantCount():
         
             selection_string = "You did a dependent ANOVA"
     
+
     # This is actually where we're defining the variable names that will be available in "calculate.html"
+    text_messages = formatSelectionString(parameters)
 
     
     return render_template(
         "index.html",
         num_participants = display_num,
-        selection_values = selection_string,
+        selection_values = text_messages["selection_string"],
+        description_message = text_messages["description_string"],
         selections = parameters
     )
 

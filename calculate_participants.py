@@ -55,7 +55,47 @@ def calculateDependentANOVA(alpha="0.05", power="0.8", effect_size="0.25", num_l
 
 
 
+def formatSelectionString(paramsDict):
 
+    # method is not getting updated how come?
+
+    default_frags = ["You are conducting"," and you want to find the sample size you need to conduct", ". Your ideal sample size depends on your chosen p-value, statistical power, and effect size. Use the standard parameters below or enter your own!"]
+    method_frag = ""
+
+    desc_frags = ["To detect down to an effect size of d = "," at ","% power (alpha = ",") for your ",", you will need at least:"]
+
+    if(paramsDict["methodType"] == "experiment"):
+        method_frag =  " an experiment"
+    elif(paramsDict["methodType"] == "survey"):
+        method_frag = " a survey study"
+
+    if(paramsDict["Tindependece"] == "independent"):
+        dependence_frag =  " an independent"
+    elif(paramsDict["Tindependece"] == "dependent"):
+        dependence_frag = " a dependent"
+
+    if(paramsDict["testType"] == "T-test"):
+        test_frag =  " t-test ("
+    elif(paramsDict["testType"] == "ANOVA"):
+        test_frag = " ANOVA ("
+    
+    if(paramsDict["Tbalance"] == "balance-yes"):
+        balance_frag =  "balanced groups,"
+    elif(paramsDict["Tbalance"] == "balance-no"):
+        balance_frag = "unbalanced groups,"  
+    
+    if(paramsDict["numTails"] == "two-sided"):
+        tails_frag =  " two-tailed)"
+    elif(paramsDict["numTails"] == "larger"):
+        tails_frag = " one-tailed)"  
+
+    selection_string = default_frags[0] + method_frag + default_frags[1] + dependence_frag + test_frag + balance_frag + tails_frag+default_frags[2] 
+    
+    description_string = desc_frags[0] + paramsDict["user_effect"] + desc_frags[1] + str(float(paramsDict["user_power"])*100) + desc_frags[2] + paramsDict["user_alpha"] + desc_frags[3]+ paramsDict["Tindependece"]+ test_frag + balance_frag + tails_frag+desc_frags[4]
+
+    display_text = {"selection_string":selection_string, "description_string":description_string}
+
+    return display_text
 
 
 # # Ignore the below variables for the purposes of the webapp. This is just a way to test that our 

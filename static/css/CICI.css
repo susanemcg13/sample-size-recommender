@@ -69,7 +69,13 @@ form{
 #selections-status{
   text-align: left;
 }
-
+#total-count{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
 #participant-num{
   margin-top: 1em;
   margin-bottom: 1em;
@@ -98,6 +104,18 @@ text-align:center;
     display:none;
 }
 
+#power-feedback{
+  font-weight: normal;
+  font-size: 14px;
+}
+#effect-size-feedback{
+  font-weight: normal;
+  font-size: 14px;  
+}
+#alpha-feedback{
+  font-weight: normal;
+  font-size: 14px;  
+}
 
 .response-required{
   color: #FF0000;

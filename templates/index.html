@@ -510,15 +510,15 @@ TODO (in no particular order)
             <div>Alpha (p-value):</div><br>
             <input type="text" name="alpha_input" id="alpha_entry" placeholder="e.g. 0.05" value="0.05" /><br />
 
-            <div id="alpha-feedback"></div>
+            <div id="alpha-feedback" class="alert alert-primary align-items-center">This is the p-value you will use for test result significance. Common choices: .05, .01, .001. Higher p-values need fewer participants but &gt;.05 is rarely acceptable.</div>
           </div>
 
           <!-- EFFECT SIZE -->
           <div class="col-6">
-            <div id="effect-size"><b>Minimum Detectable Effect Size (Cohen's d):</b><br/> 0.5</div><br>
+            <div id="effect-size"><b>Minimum Detectable Effect Size (Cohen's d):</b><br /> 0.5</div><br>
             <input type="text" name="effect_input" id="effect_entry" data-slider-id='ex1Slider' data-slider-min="0.2"
               data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" /><br />
-            <div id="effect-size-feedback"></div>
+            <div id="effect-size-feedback" class="alert alert-primary align-items-center">T-test effect sizes: small (.2), medium (.5), large (.8). Detecting smaller effects requires exponentially more participants. Many studies aim for between .2 and .5; &gt;.5 risks missing true differences.</div>
           </div>
 
           <!-- POWER -->
@@ -526,14 +526,21 @@ TODO (in no particular order)
             <div id="power">Power: 0.8</div><br>
             <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text"
               data-slider-min="0.5" data-slider-max="0.99" data-slider-step="0.01" data-slider-value="0.8" /><br />
-            <div id="power-feedback"></div>
+            <div id="power-feedback" class="alert alert-primary align-items-center">A power of .80 (80%) is standard. Higher power needs more participants, while &lt;.80 risks missing true effects and is rarely acceptable.</div>
           </div>
         </div>
       </form>
       <!-- PARTICIPANT COUNT ROW START -->
 
       <div class="row results">
-        <div class="col-4" id="total-count">Total participant count: {{num_participants}}</div>
+        <div class="col-12 alert alert-primary align-items-center">
+          <div class="row">
+            <div class="col-12">{{description_message}}</div>
+          </div>
+          <div class="row">
+            <div class="col-12" id="total-count">{{num_participants}}<br />Participants Total</div>
+          </div>
+        </div>
         <div class="hide-content" id="participant-num">{{num_participants}}</div>
         <div class="col-4" id="count-per-level">Participants per level: {{participants_per_level}}</div>
         <div class="col-4" id="count-per-group">Participants per group: {{participants_per_level}}</div>
@@ -546,7 +553,8 @@ TODO (in no particular order)
       <div class="row">
         <div class="col-12">
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3">Calculate Sample Size</button>
+            <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3">Calculate Sample
+              Size</button>
           </div>
         </div>
 
