@@ -36,6 +36,15 @@ var powerSlider = new Slider('#power_entry', {
 powerSlider.on("change", powerUpdate);
 
 
+
+var alphaSlider = new Slider('#alpha_entry', {
+	formatter: function(value) {
+		return 'Current value: ' + value;
+	}
+});
+alphaSlider.on("change", alphaUpdate);
+
+
 if (current_url == "/select"){
 
     // if we're back at the "select" stage, that means we just want to hide the homepage
@@ -74,11 +83,22 @@ if (current_url == "/calculate_participants"){
     powerMetrics["power"] = query_params.get('power_input');
     powerMetrics["num-participants"] = document.getElementById("participant-num").innerHTML;
 
+    // setting visible power values
     powerSlider.setValue(powerMetrics["power"]);
-    document.getElementById("power").innerHTML = "Power:<br/>"+powerMetrics["power"];
+    document.getElementById("power-size").value = powerMetrics["power"];
+  
+    //setting visible effect size values
     effectSlider.setValue(powerMetrics["effect-size"]);
-    document.getElementById("effect-size").innerHTML = "Minimum Detectable Effect Size (Cohen's d):<br/>"+powerMetrics["effect-size"];
-    document.getElementById("alpha_entry").value = powerMetrics["alpha"];
+    document.getElementById("effect-size").value = powerMetrics["effect-size"];
+    
+    //setting visible alpha values
+    alphaSlider.setValue(powerMetrics["alpha"]);
+    document.getElementById("alpha-size").value = powerMetrics["alpha"];
+
+
+
+    // THE BELOW IS ALL SETTING FORM VALUES TO HOLD ON TO THIS INFORMATION
+
     document.getElementById("tails_value").value = query_params.get('tails_input');
     document.getElementById("method_value").value = query_params.get('method_input');
 
@@ -107,6 +127,98 @@ if (current_url == "/calculate_participants"){
 }
 
 
+function resetResultsDisplay(){
+document.getElementById("calc_description").innerHTML = "";
+document.getElementById("total-count").innerHTML = "???"
+
+}
+
+function effectUpdate(sliderValue){
+    powerMetrics["effect-size"] = sliderValue.newValue;
+    document.getElementById("effect-size").value = sliderValue.newValue;
+    resetResultsDisplay();
+}
+
+function effectInputUpdate(event){
+    updateValue = event.target.value;
+    if(isNaN(updateValue)){
+        updateValue = 0.5;
+    }
+    if(updateValue<0.2){
+        updateValue = 0.2
+    }
+    if(updateValue>0.8){
+        updateValue = 0.8
+    }
+    event.target.value = updateValue;
+    powerMetrics["effect-size"] = updateValue;
+    effectSlider.setValue(powerMetrics["effect-size"]);
+    resetResultsDisplay();
+    
+}
+
+document.getElementById("effect-size").addEventListener('input', effectInputUpdate);
+
+
+
+function alphaUpdate(sliderValue){
+    powerMetrics["alpha"] = sliderValue.newValue;
+    document.getElementById("alpha-size").value = sliderValue.newValue;
+    resetResultsDisplay();
+
+}
+
+function alphaInputUpdate(event){
+    updateValue = event.target.value;
+    if(isNaN(updateValue)){
+        updateValue = 0.05;
+    }
+    if(updateValue<0.001){
+        updateValue = 0.001
+    }
+    if(updateValue>0.1){
+        updateValue = 0.1
+    }
+    event.target.value = updateValue;
+    powerMetrics["alpha"] = updateValue;
+    alphaSlider.setValue(powerMetrics["alpha"]);
+    resetResultsDisplay();
+}
+
+document.getElementById("alpha-size").addEventListener('input', alphaInputUpdate);
+
+
+
+
+
+function powerUpdate(sliderValue){
+    powerMetrics["power"] = sliderValue.newValue;
+    document.getElementById("power-size").value = sliderValue.newValue;
+    resetResultsDisplay();
+}
+
+function powerInputUpdate(event){
+    updateValue = event.target.value;
+    if(isNaN(updateValue)){
+        updateValue = 0.80;
+    }
+    if(updateValue<0.50){
+        updateValue = 0.50
+    }
+    if(updateValue>0.99){
+        updateValue = 0.99
+    }
+    event.target.value = updateValue;
+    powerMetrics["power"] = updateValue;
+    powerSlider.setValue(powerMetrics["power"]);
+    resetResultsDisplay();
+}
+
+document.getElementById("power-size").addEventListener('input', powerInputUpdate);
+
+
+
+
 var calculationsLog = {
     "observations":[]
 }
@@ -130,18 +242,6 @@ for (var i = 0; i < buttonsList.length; i++) {
 }
 
 
-function effectUpdate(sliderValue){
-    powerMetrics["effect-size"] = sliderValue.newValue;
-    document.getElementById("effect-size").innerHTML = "Minimum Detectable Effect Size (Cohen's d):<br/>"+sliderValue.newValue;
-
-}
-
-function powerUpdate(sliderValue){
-    console.log(sliderValue.newValue);
-    powerMetrics["power"] = sliderValue.newValue;
-    document.getElementById("power").innerHTML = "Power: "+sliderValue.newValue;
-
-}
 
 function showOptions(buttonClick){
     document.getElementById("landing-page").classList.add("hide-content");

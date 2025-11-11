@@ -486,7 +486,9 @@ TODO (in no particular order)
         <div class="col-12 alert alert-secondary" id="selections-status">
           {{selection_values}}
         </div>
-
+         <!-- <div class="col-12 alert alert-secondary" id="tester">
+          {{selections["methodType"]}}
+        </div> -->
       </div>
 
       <form id="calc_parameters" action="/calculate_participants" method="get">
@@ -508,22 +510,26 @@ TODO (in no particular order)
 
           <div class="col-3">
             <div>Alpha (p-value):</div><br>
-            <input type="text" name="alpha_input" id="alpha_entry" placeholder="e.g. 0.05" value="0.05" /><br />
+            <input type="text" id="alpha-size"/><br/>
+            <input type="text" name="alpha_input" id="alpha_entry" data-slider-id='ex1Slider' data-slider-min="0.001"
+              data-slider-max="0.1" data-slider-step="0.001" data-slider-value="0.05" /><br />
 
             <div id="alpha-feedback" class="alert alert-primary align-items-center">This is the p-value you will use for test result significance. Common choices: .05, .01, .001. Higher p-values need fewer participants but &gt;.05 is rarely acceptable.</div>
           </div>
 
           <!-- EFFECT SIZE -->
           <div class="col-6">
-            <div id="effect-size"><b>Minimum Detectable Effect Size (Cohen's d):</b><br /> 0.5</div><br>
-            <input type="text" name="effect_input" id="effect_entry" data-slider-id='ex1Slider' data-slider-min="0.2"
+            <div id="effect-text"><b>Minimum Detectable Effect Size (Cohen's d):</b></div>
+            <input type="text" id="effect-size"/><br/>
+            <input type="number" name="effect_input" id="effect_entry" data-slider-id='ex1Slider' data-slider-min="0.2"
               data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" /><br />
             <div id="effect-size-feedback" class="alert alert-primary align-items-center">T-test effect sizes: small (.2), medium (.5), large (.8). Detecting smaller effects requires exponentially more participants. Many studies aim for between .2 and .5; &gt;.5 risks missing true differences.</div>
           </div>
 
           <!-- POWER -->
           <div class="col-3">
-            <div id="power">Power: 0.8</div><br>
+            <div id="power-text"><b>Power:</b></div>
+            <input type="text" id="power-size"><br/>
             <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text"
               data-slider-min="0.5" data-slider-max="0.99" data-slider-step="0.01" data-slider-value="0.8" /><br />
             <div id="power-feedback" class="alert alert-primary align-items-center">A power of .80 (80%) is standard. Higher power needs more participants, while &lt;.80 risks missing true effects and is rarely acceptable.</div>
@@ -535,7 +541,7 @@ TODO (in no particular order)
       <div class="row results">
         <div class="col-12 alert alert-primary align-items-center">
           <div class="row">
-            <div class="col-12">{{description_message}}</div>
+            <div class="col-12 design-description" id="calc_description">{{description_message}}</div>
           </div>
           <div class="row">
             <div class="col-12" id="total-count">{{num_participants}}<br />Participants Total</div>
@@ -608,8 +614,8 @@ TODO (in no particular order)
   <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
 
   <script type="text/javascript">
-    console.log("hi there");
-    myVar = myFunc({{ selections| tojson}});
+    // console.log("hi there");
+    // myVar = myFunc({{ selections| tojson}});
   </script>
 
 </body>

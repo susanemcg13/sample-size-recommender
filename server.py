@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from waitress import serve
+from markupsafe import Markup
 import math
 
 # have to import the functions we're using from our custom python files
@@ -115,8 +116,8 @@ def get_participantCount():
     return render_template(
         "index.html",
         num_participants = display_num,
-        selection_values = text_messages["selection_string"],
-        description_message = text_messages["description_string"],
+        selection_values = Markup(text_messages["selection_string"]),
+        description_message = Markup(text_messages["description_string"]),
         selections = parameters
     )
 

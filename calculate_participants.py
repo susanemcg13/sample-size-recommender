@@ -62,17 +62,17 @@ def formatSelectionString(paramsDict):
     default_frags = ["You are conducting"," and you want to find the sample size you need to conduct", ". Your ideal sample size depends on your chosen p-value, statistical power, and effect size. Use the standard parameters below or enter your own!"]
     method_frag = ""
 
-    desc_frags = ["To detect down to an effect size of d = "," at ","% power (alpha = ",") for your ",", you will need at least:"]
+    desc_frags = ["To detect down to an effect size of <b>d = "," at <b>","% power</b> (alpha = <b>","</b>) for your <b>","</b>, you will need at least:"]
 
     if(paramsDict["methodType"] == "experiment"):
-        method_frag =  " an experiment"
+        method_frag =  " an <b>experiment</b>;"
     elif(paramsDict["methodType"] == "survey"):
-        method_frag = " a survey study"
+        method_frag = " a <b>survey study</b> "
 
     if(paramsDict["Tindependece"] == "independent"):
-        dependence_frag =  " an independent"
+        dependence_frag =  " an <b>independent"
     elif(paramsDict["Tindependece"] == "dependent"):
-        dependence_frag = " a dependent"
+        dependence_frag = " a <b>dependent"
 
     if(paramsDict["testType"] == "T-test"):
         test_frag =  " t-test ("
@@ -85,13 +85,13 @@ def formatSelectionString(paramsDict):
         balance_frag = "unbalanced groups,"  
     
     if(paramsDict["numTails"] == "two-sided"):
-        tails_frag =  " two-tailed)"
+        tails_frag =  " two-tailed)</b>"
     elif(paramsDict["numTails"] == "larger"):
-        tails_frag = " one-tailed)"  
+        tails_frag = " one-tailed)</b>"  
 
     selection_string = default_frags[0] + method_frag + default_frags[1] + dependence_frag + test_frag + balance_frag + tails_frag+default_frags[2] 
     
-    description_string = desc_frags[0] + paramsDict["user_effect"] + desc_frags[1] + str(float(paramsDict["user_power"])*100) + desc_frags[2] + paramsDict["user_alpha"] + desc_frags[3]+ paramsDict["Tindependece"]+ test_frag + balance_frag + tails_frag+desc_frags[4]
+    description_string = desc_frags[0] + paramsDict["user_effect"] +"</b>"+ desc_frags[1] + str(float(paramsDict["user_power"])*100) + desc_frags[2] + paramsDict["user_alpha"] + desc_frags[3]+ paramsDict["Tindependece"]+ test_frag + balance_frag + tails_frag+desc_frags[4]
 
     display_text = {"selection_string":selection_string, "description_string":description_string}
 
