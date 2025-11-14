@@ -295,7 +295,30 @@ function showLog(){
 function exportLog(clickEvent){
     //solution pulled from here: https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
     //OK for now; output is ugly (well, it all is ;)
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(calculationsLog));
+
+    line1 = "Results from PowerUp! calculation on: " + new Date().toUTCString()+"\n\n";
+    line2 = "Method/IRB write-up template:\n\nAn a priori power analysis was conducted using PowerUp! to determine the required sample size for a(n) "
+    varsA = document.getElementById("independence_value").value+ " samples "+document.getElementById("test_value").value;
+    tails_text = document.getElementById("tails_value").value;
+    if (tails_text == "larger"){
+        varsA+= " (one-tailed)";
+    }else{
+        varsA+= " (two-tailed)";
+    }
+    balance_text = document.getElementById("balance_value").value;
+    varsA += ", assuming"
+    if (balance_text == "balance-yes"){
+        varsA += " equal"
+    }else{
+        varsA += " unequal"
+    }
+    varsA += " groups.\n"
+
+    boiler_text = "We specified a minimum detectable effect size of [Cohen's d] = "+powerMetrics["effect-size"]+" [PROVIDE JUSTIFICATION]."
+    boiler_text2 = "\nTo detect an effect size of [Cohen’s d] = "+powerMetrics["effect-size"]+" or higher with alpha = "+powerMetrics["alpha"]+" and power = "+powerMetrics["power"]
+    boiler_text3 = ",  the minimum required sample size was estimated to be N = "+powerMetrics["num-participants"]+" per group."
+
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(line1+line2+varsA+boiler_text+boiler_text2+boiler_text3);
     var downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute("download", "CICIexport.txt");
@@ -305,7 +328,7 @@ function exportLog(clickEvent){
 
 }
 
-// document.getElementById("export-log").addEventListener("click",exportLog);
+document.getElementById("export-log").addEventListener("click",exportLog);
 
 
 function optionOver(event){
@@ -372,7 +395,7 @@ function optionClick(event){
     event.target.setAttribute("data-selected", "true");
 
     // Well, the query string is hideous but that's not unusual and at least it's readable
-    if (event.target.id != "start-button"){
+    if (event.target.id != "start-button" && event.target.id != "export-log"){
         var currentFormEntry;
         // console.log(containingList);
         if(containingList == "ANOVA_independent_groups"){
