@@ -118,6 +118,7 @@ def get_participantCount():
         num_participants = display_num,
         selection_values = Markup(text_messages["selection_string"]),
         description_message = Markup(text_messages["description_string"]),
+        effect_size_string = Markup(text_messages["effect_size_string"]),
         selections = parameters
     )
 

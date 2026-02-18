@@ -298,7 +298,13 @@ function exportLog(clickEvent){
 
     line1 = "Results from PowerUp! calculation on: " + new Date().toUTCString()+"\n\n";
     line2 = "Method/IRB write-up template:\n\nAn a priori power analysis was conducted using PowerUp! to determine the required sample size for a(n) "
-    varsA = document.getElementById("independence_value").value+ " samples "+document.getElementById("test_value").value;
+    cohen_text = "[Cohen's d]"
+    is_ind = document.getElementById("independence_value").value
+    varsA = is_ind+ " samples "+document.getElementById("test_value").value;
+
+    if(is_ind == "dependent"){
+        cohen_text = "[Cohen's dz]"
+    }
     tails_text = document.getElementById("tails_value").value;
     if (tails_text == "larger"){
         varsA+= " (one-tailed)";
@@ -314,8 +320,8 @@ function exportLog(clickEvent){
     }
     varsA += " groups.\n"
 
-    boiler_text = "We specified a minimum detectable effect size of [Cohen's d] = "+powerMetrics["effect-size"]+" [PROVIDE JUSTIFICATION]."
-    boiler_text2 = "\nTo detect an effect size of [Cohen’s d] = "+powerMetrics["effect-size"]+" or higher with alpha = "+powerMetrics["alpha"]+" and power = "+powerMetrics["power"]
+    boiler_text = "We specified a minimum detectable effect size of "+cohen_text+" = "+powerMetrics["effect-size"]+" [PROVIDE JUSTIFICATION]."
+    boiler_text2 = "\nTo detect an effect size of "+cohen_text+" = "+powerMetrics["effect-size"]+" or higher with alpha = "+powerMetrics["alpha"]+" and power = "+powerMetrics["power"]
     boiler_text3 = ",  the minimum required sample size was estimated to be N = "+powerMetrics["num-participants"]+" per group."
 
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(line1+line2+varsA+boiler_text+boiler_text2+boiler_text3);
@@ -397,7 +403,6 @@ function optionClick(event){
     // Well, the query string is hideous but that's not unusual and at least it's readable
     if (event.target.id != "start-button" && event.target.id != "export-log"){
         var currentFormEntry;
-        // console.log(containingList);
         if(containingList == "ANOVA_independent_groups"){
             currentFormEntry = document.getElementById("ANOVA_groups_value");
             currentFormEntry.value = event.target.value;
