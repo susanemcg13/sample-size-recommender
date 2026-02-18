@@ -300,10 +300,16 @@ function exportLog(clickEvent){
     line2 = "Method/IRB write-up template:\n\nAn a priori power analysis was conducted using PowerUp! to determine the required sample size for a(n) "
     cohen_text = "[Cohen's d]"
     is_ind = document.getElementById("independence_value").value
+
+    total_or_group = powerMetrics["num-participants"] + " participants."
     varsA = is_ind+ " samples "+document.getElementById("test_value").value;
 
     if(is_ind == "dependent"){
         cohen_text = "[Cohen's dz]"
+    }else{
+        //change participant count if independent
+        total_or_group = String(Number(powerMetrics["num-participants"])*2)+" total participants, "+powerMetrics["num-participants"]+" per group."
+
     }
     tails_text = document.getElementById("tails_value").value;
     if (tails_text == "larger"){
@@ -322,7 +328,7 @@ function exportLog(clickEvent){
 
     boiler_text = "We specified a minimum detectable effect size of "+cohen_text+" = "+powerMetrics["effect-size"]+" [PROVIDE JUSTIFICATION]."
     boiler_text2 = "\nTo detect an effect size of "+cohen_text+" = "+powerMetrics["effect-size"]+" or higher with alpha = "+powerMetrics["alpha"]+" and power = "+powerMetrics["power"]
-    boiler_text3 = ",  the minimum required sample size was estimated to be N = "+powerMetrics["num-participants"]+" per group."
+    boiler_text3 = ",  the minimum required sample size was estimated to be "+total_or_group
 
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(line1+line2+varsA+boiler_text+boiler_text2+boiler_text3);
     var downloadAnchorNode = document.createElement('a');
