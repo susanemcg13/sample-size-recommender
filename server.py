@@ -77,16 +77,21 @@ def get_participantCount():
         parameters["user_alpha"] = "0.05"
 
     
-    
+    display_num = ""
+
+    group_description = "" 
+
     # so far we have only implemented the T-test
     if(parameters["testType"] == "T-test"):
         # shocker, this is for the independent T-test. Number of tails is passed
         if(parameters["Tindependece"] == "independent"):
             display_num = calculateParticipantCount(float(parameters["user_alpha"]), float(parameters["user_power"]), float(parameters["user_effect"]), str(parameters["numTails"]))
-        
+            group_description = str(int(display_num)*2) + " Total Participants, "+ str(display_num)+" Per Group"
+
         # same same, for dependent
         if(parameters["Tindependece"] == "dependent"):
             display_num = calculateDependentParticipantCount(float(parameters["user_alpha"]), float(parameters["user_power"]), float(parameters["user_effect"]), str(parameters["numTails"]))
+            group_description = str(display_num)+" Participants"
 
         selection_string = "You did a T-test"
 
@@ -116,6 +121,7 @@ def get_participantCount():
     return render_template(
         "index.html",
         num_participants = display_num,
+        participant_text = group_description,
         selection_values = Markup(text_messages["selection_string"]),
         description_message = Markup(text_messages["description_string"]),
         effect_size_string = Markup(text_messages["effect_size_string"]),
