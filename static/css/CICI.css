@@ -126,6 +126,65 @@ text-align:center;
   margin-top:20px;  
 }
 
+#alpha-slider-bg{
+height: 40px;
+width: 210px;
+display: inline-block;
+background-image:
+    linear-gradient(
+      to right, 
+      #FFEB57, 
+      #1ABCFE, 
+      #1ABCFE,
+      #1ABCFE,
+      #1ABCFE,
+      #1ABCFE,
+      #FFEB57,
+      #FFEB57,
+      #FFEB57,
+      #FFEB57,
+      #FFEB57
+    );
+}
+
+
+#cohens-slider-bg{
+height: 40px;
+width: 210px;
+display: inline-block;
+background-image:
+    linear-gradient(
+      to right, 
+      #FFEB57, 
+      #FFEB57, 
+      #1ABCFE, 
+      #1ABCFE,
+      #1ABCFE,
+      #FFEB57,
+      #FFEB57,
+      #FFEB57
+    );
+}
+
+#power-slider-bg{
+height: 40px;
+width: 210px;
+display: inline-block;
+background-image:
+    linear-gradient(
+      to right, 
+      #FFEB57, 
+      #FFEB57, 
+      #1ABCFE, 
+      #1ABCFE,
+      #1ABCFE,
+      #FFEB57,
+      #FFEB57,
+      #FFEB57
+    );
+}
+
+
 .response-required{
   color: #FF0000;
   font-size: large;

@@ -74,11 +74,11 @@ def formatSelectionString(paramsDict):
 
     # IF INDEPENDENT T TEST
     if(paramsDict["Tindependece"] == "independent"):
-        effect_size_string += " (Cohen's d):"
+        effect_size_string += " (Cohen's <em>d</em>):"
         dependence_frag =  " an <b>independent"
     # IF DEPENDENT T TEST
     elif(paramsDict["Tindependece"] == "dependent"):
-        effect_size_string += " (Cohen's dz):"
+        effect_size_string += " (Cohen's <em>dz</em>):"
         d_string = "dz = "
         dependence_frag = " a <b>dependent"
 

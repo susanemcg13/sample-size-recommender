@@ -97,14 +97,14 @@ TODO (in no particular order)
 
     <!-- MAIN LANDING PAGE CONTENT-->
     <div class="px-4 py-5 my-5" id="landing-page">
-      <h1 class="display-5 fw-bold text-body-emphasis text-center">Find Your Just-Right Sample Size with PowerUp!</h1>
+      <h1 class="display-5 fw-bold text-body-emphasis text-center">Find Your Just-Right Sample Size with SampleSavvy!</h1>
       <div class="col-lg-6 mx-auto">
         <p class="lead mb-4 text-center">Built by researchers, for researchers.</p>
         <div class="alert alert-primary text-left" role="alert">
           Get a sample size recommendation for your human subjects study that's based on power analysis and backed by best practices. Built by researchers specializing in study design, privacy, and usability.
           <br/>
           <div class="col-lg-12 mx-auto align-items-left">
-          How PowerUp! works:
+          How SampleSavvy! works:
 <ul>
 <li><b>Answer a few quick questions</b><br/>
 Tell us about your study design and statistical test (e.g., t-test, ANOVA). </li>
@@ -505,12 +505,13 @@ More power-efficient for tightly controlled research with well-justified directi
           <!-- ALPHA -->
 
           <div class="col-4">
-            <div>Alpha (p-value):</div><br>
+            <div>Alpha (<em>p</em>-value):</div><br>
             <input type="text" id="alpha-size"/><br/>
+            <div id="alpha-slider-bg">
             <input type="text" name="alpha_input" id="alpha_entry" data-slider-id='ex1Slider' data-slider-min="0.001"
-              data-slider-max="0.1" data-slider-step="0.001" data-slider-value="0.05" /><br />
-
-            <div id="alpha-feedback" class="alert alert-primary align-items-center"> This is the p-value used to define result significance. Common choices: .05, .01, .001. <br/>Larger p-values = fewer participants 
+              data-slider-max="0.1" data-slider-step="0.001" data-slider-value="0.05"/><br />
+            </div>
+            <div id="alpha-feedback" class="alert alert-primary align-items-center"> This is the <em>p</em>-value used to define result significance. Common choices: .05, .01, .001. <br/>Larger <em>p</em>-values = fewer participants 
 <br/> &#x3e;.05 is rarely acceptable, but &#x3c;.01 may mean you’re collecting data from participants that you don’t need, unnecessarily risking their privacy
 </div>
           </div>
@@ -519,8 +520,10 @@ More power-efficient for tightly controlled research with well-justified directi
           <div class="col-4">
             <div id="effect-text">{{effect_size_string}}</div>
             <input type="text" id="effect-size"/><br/>
+            <div id="cohens-slider-bg">
             <input type="number" name="effect_input" id="effect_entry" data-slider-id='ex1Slider' data-slider-min="0.2"
               data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" /><br />
+              </div>
             <div id="effect-size-feedback" class="alert alert-primary align-items-center"> T-test effect sizes: small (.2), medium (.5), large (.8). Many studies aim for between .2 and .5
 <br/>Smaller effects = exponentially more participants
 <br/> &#x3e;.8 means you’ll likely collect data you can’t use, risking participant privacy with no scientific gain
@@ -529,11 +532,13 @@ More power-efficient for tightly controlled research with well-justified directi
 
           <!-- POWER -->
           <div class="col-4">
-            <div id="power-text"><b>Power (Beta - 1):<br/>&nbsp;&nbsp;&nbsp;</b></div>
+            <div id="power-text"><b>Power (1-&#946;):<br/>&nbsp;&nbsp;&nbsp;</b></div>
             <input type="text" id="power-size"><br/>
+            <div id="power-slider-bg">
             <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text"
               data-slider-min="0.5" data-slider-max="0.99" data-slider-step="0.01" data-slider-value="0.8" /><br />
-            <div id="power-feedback" class="alert alert-primary align-items-center">A power of .80 (80%) is standard. 
+            </div>
+              <div id="power-feedback" class="alert alert-primary align-items-center">A power of .80 (80%) is standard. 
 <br/>Higher power = more participants
 <br/>&#x3c;.80 risks missing true effects and is rarely acceptable; &#x3e;.90 may mean unnecessary data collection from participants
 </div>
