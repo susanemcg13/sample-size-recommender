@@ -157,7 +157,7 @@ function effectInputUpdate(event){
     
 }
 
-document.getElementById("effect-size").addEventListener('input', effectInputUpdate);
+document.getElementById("effect-size").addEventListener('change', effectInputUpdate);
 
 
 
@@ -185,7 +185,7 @@ function alphaInputUpdate(event){
     resetResultsDisplay();
 }
 
-document.getElementById("alpha-size").addEventListener('input', alphaInputUpdate);
+document.getElementById("alpha-size").addEventListener('change', alphaInputUpdate);
 
 
 
@@ -214,7 +214,7 @@ function powerInputUpdate(event){
     resetResultsDisplay();
 }
 
-document.getElementById("power-size").addEventListener('input', powerInputUpdate);
+document.getElementById("power-size").addEventListener('change', powerInputUpdate);
 
 
 
