@@ -126,10 +126,15 @@ text-align:center;
   margin-top:20px;  
 }
 
+
 #alpha-slider-bg{
 height: 40px;
 width: 210px;
 display: inline-block;
+border-radius: 10px;
+padding:0px;
+margin:0px;
+filter: drop-shadow(5px 5px 5px #333);
 background-image:
     linear-gradient(
       to right, 
@@ -145,6 +150,22 @@ background-image:
       #FFEB57,
       #FFEB57
     );
+background-size: auto 20px;    
+}
+
+.slider-handle.custom {
+	background: transparent none;
+  margin-top:-14px;
+	/* You can customize the handle and set a background image */
+}
+
+/* Or display content like unicode characters or fontawesome icons */
+.slider-handle.custom::before {
+	line-height: 2px;
+  margin-top:-14px;
+	font-size: 20px;
+	content: '\25bc'; /*unicode upside down triangle character*/
+	color: #000;
 }
 
 
@@ -152,6 +173,10 @@ background-image:
 height: 40px;
 width: 210px;
 display: inline-block;
+border-radius: 10px;
+padding:0px;
+margin:0px;
+filter: drop-shadow(5px 5px 5px #333);
 background-image:
     linear-gradient(
       to right, 
@@ -170,6 +195,10 @@ background-image:
 height: 40px;
 width: 210px;
 display: inline-block;
+border-radius: 10px;
+padding:0px;
+margin:0px;
+filter: drop-shadow(5px 5px 5px #333);
 background-image:
     linear-gradient(
       to right, 
@@ -246,6 +275,12 @@ background-image:
     overflow-y: hidden;
   }
 
+  .helper-box{
+    font-size: small;
+  }
+  .option-help{
+    font-size: small;
+  }
   .nav-scroller .nav {
     display: flex;
     flex-wrap: nowrap;
@@ -294,6 +329,7 @@ background-image:
   .sliders_control {
     position: relative;
     min-height: 50px;
+    background: transparent;
   }
   
   .form_control {

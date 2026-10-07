@@ -17,7 +17,7 @@
   <!-- using Flask to load the css from static/css/styles.css -->
   <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="{{ url_for('static', filename='css/heroes.css')}}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/CICI.css')}}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='css/CICI.css')}}" rel="stylesheet" />
   <!-- <link rel="stylesheet" href="css/CICI.css"> -->
 
   <!-- <link href="css/bootstrap.min.css" rel="stylesheet"
@@ -30,6 +30,20 @@
 <body>
   <!-- SVG symbols, e.g. "home icon"-->
   <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="green-check" viewBox="0 0 16 16">
+      <path
+        d="M15.5564 1.49512H2.55708C2.00461 1.49512 1.55713 1.94259 1.55713 2.49506V15.4944C1.55713 16.0469 2.00461 16.4943 2.55708 16.4943H15.5564C16.1089 16.4943 16.5563 16.0469 16.5563 15.4944V2.49506C16.5563 1.94259 16.1089 1.49512 15.5564 1.49512Z"
+        fill="#689F38" />
+      <path
+        d="M14.7689 1.49512H2.49458C1.97836 1.49887 1.56088 1.91634 1.55713 2.43257V14.6694C1.55588 15.1869 1.97461 15.6056 2.49208 15.6069C2.49333 15.6069 2.49333 15.6069 2.49458 15.6069H14.7564C15.2739 15.6081 15.6926 15.1894 15.6939 14.6719C15.6939 14.6707 15.6939 14.6707 15.6939 14.6694V2.43257C15.7051 1.92634 15.3027 1.50637 14.7964 1.49512C14.7877 1.49512 14.7777 1.49512 14.7689 1.49512Z"
+        fill="#7CB342" />
+      <path opacity="0.3"
+        d="M6.01964 2.60764C6.01964 2.32016 5.81965 2.23266 4.66971 2.27016C3.70726 2.30766 3.23229 2.42015 2.9448 2.77014C2.65732 3.12012 2.58232 3.83258 2.56982 4.68254C2.56982 5.2825 2.56982 5.84497 2.88231 5.84497C3.30729 5.84497 3.30729 4.85753 3.65727 4.30755C4.33223 3.22011 6.01964 2.98262 6.01964 2.60764Z"
+        fill="white" />
+      <path
+        d="M6.40695 14.6818C5.91198 14.6956 5.46825 14.3794 5.31951 13.9069L3.43211 8.21969C3.24962 7.61847 3.5896 6.98225 4.19082 6.79976C4.77204 6.62352 5.38951 6.93475 5.5945 7.50722L6.81943 11.1945L12.7066 3.74492C13.0966 3.2512 13.8128 3.16745 14.3065 3.55743C14.8003 3.94741 14.884 4.66362 14.494 5.15735L7.29441 14.2444C7.08067 14.5181 6.75443 14.6793 6.40695 14.6818Z"
+        fill="#FBF9F9" />
+    </symbol>
     <symbol id="house-door-fill" viewBox="0 0 16 16">
       <path
         d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z">
@@ -97,29 +111,57 @@ TODO (in no particular order)
 
     <!-- MAIN LANDING PAGE CONTENT-->
     <div class="px-4 py-5 my-5" id="landing-page">
-      <h1 class="display-5 fw-bold text-body-emphasis text-center">Find Your Just-Right Sample Size with SampleSavvy!</h1>
+      <h1 class="display-5 fw-bold text-body-emphasis text-center">Find Your Just-Right Sample Size with SampleSavvy!
+      </h1>
       <div class="col-lg-6 mx-auto">
         <p class="lead mb-4 text-center">Built by researchers, for researchers.</p>
         <div class="alert alert-primary text-left" role="alert">
-          Get a sample size recommendation for your human subjects study that's based on power analysis and backed by best practices. Built by researchers specializing in study design, privacy, and usability.
-          <br/>
+          SampleSavvy helps researchers plan the number of participants needed for <b>quantitative human subjects
+            studies,</b> offering easy-to-use power analysis and transparent documentation.
+          <br /><br />
           <div class="col-lg-12 mx-auto align-items-left">
-          How SampleSavvy! works:
-<ul>
-<li><b>Answer a few quick questions</b><br/>
-Tell us about your study design and statistical test (e.g., t-test, ANOVA). </li>
-<li><b>Get a sample size estimate</b><br/>
-Receive an initial recommendation using standard power, alpha, and effect size parameters.</li>
-<li><b>Fine-tune your inputs</b><br/>
-Adjust the parameters to suit your study's needs, with guidance to help you make informed decisions.</li>
-<li><b>Export your results</b><br/>
-Download your sample size results, interpretation, and a template “Methods” write-up. </li>
-</ul>
+            How SampleSavvy! works:
+            <br />
+            <ul>
+              <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;"><b>Describe your study</b></span><br />
+                <span style="padding-left: 1.6em;">Answer guided questions and SampleSavvy selects the appropriate power
+                  analysis approach.</span>
+              </li>
+              <li>
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;"><b>Get an initial sample estimate to fine-tune</b></span><br />
+                <span style="padding-left: 1.6em;">Get an estimate using standard parameters and fine-tune it with guidance on tradeoffs.</span></li>
+              <li>
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;"><b>Choose your just-right sample size</b></span><br />
+                <span style="padding-left: 1.6em;">Find an estimate that balances statistical needs with practical considerations.</span></li>
+              <li>
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;"><b>Choose your just-right sample size</b></span><br />
+                <span style="padding-left: 1.6em;"><b>Export your results</b></span><br />
+                <span style="padding-left: 1.6em;">Generate report-ready documentation for protocols, preregistrations, or manuscripts.</span></li>
+            </ul>
 
-</div>
+          </div>
         </div>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="start-button">Get started</button>
+        </div>
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-top:60px; font-size: small;"><b>SampleSavvy is built by researchers specializing in study design, privacy, and usability.</b>
+          </div>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-top:20px; font-size: small;">
+          <em>Foundational research for this tool was supported by the National science Foundation under <a href="https://www.nsf.gov/awardsearch/show-award?AWD_ID=2232690" target="_blank">Grant No. 2232690</a>. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</em>
         </div>
       </div>
     </div>
@@ -165,21 +207,22 @@ Download your sample size results, interpretation, and a template “Methods” 
                   <use xlink:href="#info-fill" />
                 </svg> -->
                 <div>
-                  You don’t need to know your full study design to get a sample size estimate, but sharing it helps us tailor recommendations.<br/>P.S. We’re developing more study type options–check back soon!
+                  You don't need to know your full study design to get a sample size estimate, but sharing it helps us
+                  tailor recommendations.<br />P.S. We're developing more study type options&mdash;check back soon!
 
                 </div>
               </div>
               <!-- END OVERALL METHOD INFO -->
               <!-- SURVEY METHOD INFO -->
               <div id="survey-info" class="option-help hide-content alert alert-warning">
-Describes or estimates characteristics, attitudes, or relationships in a population
-<i>e.g., surveying a population, other correlational or descriptive studies</i>
+                Describes or estimates characteristics, attitudes, or relationships in a population
+                <i>e.g., surveying a population, other correlational or descriptive studies</i>
               </div>
               <!-- END SURVEY METHOD INFO -->
               <!-- EXPERIMENT METHOD INFO -->
               <div id="experiment-info" class="option-help hide-content alert alert-warning">
-Tests whether an intervention, condition, or manipulation causes a change
-<i>e.g., testing how an independent variable impacts a dependent variable</i>
+                Tests whether an intervention, condition, or manipulation causes a change
+                <i>e.g., testing how an independent variable impacts a dependent variable</i>
 
               </div>
               <!-- END EXPERIMENT METHOD INFO -->
@@ -203,9 +246,10 @@ Tests whether an intervention, condition, or manipulation causes a change
                       data-selected="false">
                       T-test
                     </button>
-                    <!-- <button type="button" class="list-group-item list-group-item-action" id="ANOVA" data-selected="false">
-                  ANOVA
-                </button> -->
+                    <button type="button" class="list-group-item list-group-item-action" id="ANOVA"
+                      data-selected="false">
+                      ANOVA
+                    </button>
                     <button type="button" class="list-group-item list-group-item-action" id="other"
                       data-selected="false" disabled>More options coming soon!</button>
 
@@ -219,17 +263,26 @@ Tests whether an intervention, condition, or manipulation causes a change
                       <use xlink:href="#info-fill" />
                     </svg> -->
                     <div>
-Different tests require different sample sizes. <br/>
-Start with the test that addresses your main hypothesis; add others later if needed. <br/>
-P.S. It’s easy to export and save your results if you need to compare sample size estimates for multiple tests. 
+                      Different tests require different sample sizes. <br />
+                      Start with the test that addresses your main hypothesis; add others later if needed. <br />
+                      P.S. It’s easy to export and save your results if you need to compare sample size estimates for
+                      multiple tests.
                     </div>
                   </div>
                   <!-- END OVERALL TEST INFO -->
                   <!-- TTEST INFO -->
                   <div id="T-test-info" class="option-help hide-content alert alert-warning">
-Tests whether the means of two groups are different (IV = categorical at two levels, DV = continuous, unbounded, assumed to be normally distributed).
+                    Tests whether the means of two groups are different (IV = categorical at two levels, DV =
+                    continuous, unbounded, assumed to be normally distributed).
                   </div>
                   <!-- END TTEST INFO -->
+
+                  <!-- ANOVA INFO -->
+                  <div id="ANOVA-info" class="option-help hide-content alert alert-warning">
+                    This is the ANOVA helper text.
+                  </div>
+                  <!-- END ANOVA INFO -->
+
 
                   <!-- END TEST HELPER TEXT -->
                 </div>
@@ -253,7 +306,7 @@ Tests whether the means of two groups are different (IV = categorical at two lev
                 <div class="col-6">
 
                   <div class="selection-question">
-                    What type of t-test will you use? 
+                    What type of t-test will you use?
                   </div>
                   <div class="list-group" id="independence">
                     <button type="button" class="list-group-item list-group-item-action" id="independent"
@@ -261,7 +314,7 @@ Tests whether the means of two groups are different (IV = categorical at two lev
                       Independent samples t-test (between-subjects)
                     </button>
                     <button type="button" class="list-group-item list-group-item-action" id="dependent"
-                      data-selected="false">Dependent samples t-test (within-subjects / repeated-measures / paired)</button>
+                      data-selected="false">Dependent samples t-test (within-subjects / repeated-measures)</button>
                   </div>
                 </div>
                 <!-- INDEPENDENCE HELPER TEXT -->
@@ -272,18 +325,22 @@ Tests whether the means of two groups are different (IV = categorical at two lev
                       <use xlink:href="#info-fill" />
                     </svg> -->
                     <div>
-Dependent t-tests generally require fewer participants than independent t-tests, because individual differences are controlled in the design by using the same participants (measured twice) or matched pairs.<br/>Independent t-tests need to statistically account for the added “noise” introduced by individual differences between subjects.
-<br/>Less between-subjects “noise” &#x2192; smaller sample needed
+                      Dependent t-tests generally require fewer participants than independent t-tests, because
+                      individual differences are controlled in the design by using the same participants (measured
+                      twice) or matched pairs.<br />Independent t-tests need to statistically account for the added
+                      “noise” introduced by individual differences between subjects.
+                      <br />Less between-subjects “noise” &#x2192; smaller sample needed
 
                     </div>
                   </div>
                   <!-- END OVERALL INDEPENDENCE INFO -->
                   <!-- INDEPENDENCE HELPER TEXT -->
                   <div id="independent-info" class="option-help hide-content alert alert-warning">
-Compares <b>two separate groups</b> (e.g., older versus younger adults).
+                    Compares <b>two separate groups</b> (e.g., older versus younger adults).
                   </div>
                   <div id="dependent-info" class="option-help hide-content alert alert-warning">
-Compares <b>one group measured twice</b> (e.g., pre/post) or <b>matched pairs</b> (e.g., parent–child).
+                    Compares <b>one group measured twice</b> (e.g., pre/post) or <b>matched pairs</b> (e.g.,
+                    parent–child).
                   </div>
 
                   <!-- END INDEPENDENCE HELPER TEXT -->
@@ -303,13 +360,13 @@ Compares <b>one group measured twice</b> (e.g., pre/post) or <b>matched pairs</b
                     <button type="button" class="list-group-item list-group-item-action" id="balance-yes"
                       data-selected="false">
                       Yes, groups will be balanced [Recommended]
-<i>e.g., 10 men and 10 women, allocation ratio = 1:1</i>
+                      <i>e.g., 10 men and 10 women, allocation ratio = 1:1</i>
 
                     </button>
                     <button type="button" class="list-group-item list-group-item-action" id="balance-no"
                       data-selected="false" disabled>No, group sizes are expected to differ substantially.
-<i>e.g., 20 students, 10 teachers, allocation ratio = 2:1</i>
-</button>
+                      <i>e.g., 20 students, 10 teachers, allocation ratio = 2:1</i>
+                    </button>
                   </div>
 
                 </div>
@@ -322,19 +379,23 @@ Compares <b>one group measured twice</b> (e.g., pre/post) or <b>matched pairs</b
                       <use xlink:href="#info-fill" />
                     </svg> -->
                     <div>
-Aim to recruit balanced groups to maximize the efficiency of your total sample. <br/>
-When groups are unequal, statistical power is limited by the smaller group’s size–power gains flatten quickly when one group is much larger than the other.<br/>
-<i>e.g., a test comparing two groups of 10 (N = 20) is nearly as statistically powerful as a test comparing 10 vs. 100 (N = 110)</i>
+                      Aim to recruit balanced groups to maximize the efficiency of your total sample. <br />
+                      When groups are unequal, statistical power is limited by the smaller group’s size–power gains
+                      flatten quickly when one group is much larger than the other.<br />
+                      <i>e.g., a test comparing two groups of 10 (N = 20) is nearly as statistically powerful as a test
+                        comparing 10 vs. 100 (N = 110)</i>
 
                     </div>
                   </div>
                   <!-- END OVERALL BALANCE INFO -->
                   <!-- NALANCE HELPER TEXT -->
                   <div id="balance-yes-info" class="option-help hide-content alert alert-warning">
-Promote group balance through stratified recruitment or quotas. For pre-post tests, use study designs that discourage participant dropout after the pre-test. 
+                    Promote group balance through stratified recruitment or quotas. For pre-post tests, use study
+                    designs that discourage participant dropout after the pre-test.
                   </div>
                   <div id="balance-no-info" class="option-help hide-content alert alert-warning">
-It’s not always possible to recruit equal groups; some variation in group size is common. Focus recruitment on the group you anticipate being smaller to improve power.
+                    It’s not always possible to recruit equal groups; some variation in group size is common. Focus
+                    recruitment on the group you anticipate being smaller to improve power.
                   </div>
 
                   <!-- END BALANCE HELPER TEXT -->
@@ -343,9 +404,6 @@ It’s not always possible to recruit equal groups; some variation in group size
 
 
               </div>
-
-
-
 
 
 
@@ -359,10 +417,11 @@ It’s not always possible to recruit equal groups; some variation in group size
                   <div class="list-group" id="tails">
                     <button type="button" class="list-group-item list-group-item-action" id="two-sided"
                       data-selected="false">
-                      Yes, I’ll use a two-tailed t-test (non-directional). [Recommended] 
+                      Yes, I’ll use a two-tailed t-test (non-directional). [Recommended]
                     </button>
                     <button type="button" class="list-group-item list-group-item-action" id="larger"
-                      data-selected="false">No, I have a strong reason to use a one-tailed t-test (directional).</button>
+                      data-selected="false">No, I have a strong reason to use a one-tailed t-test
+                      (directional).</button>
                   </div>
 
                 </div>
@@ -375,20 +434,27 @@ It’s not always possible to recruit equal groups; some variation in group size
                       <use xlink:href="#info-fill" />
                     </svg> -->
                     <div>
-                      When uncertain, choose a two-tailed test. It’s slightly less power-efficient but more flexible and widely accepted.
+                      When uncertain, choose a two-tailed test. It’s slightly less power-efficient but more flexible and
+                      widely accepted.
                     </div>
                   </div>
                   <!-- END OVERALL TAILS INFO -->
                   <!-- TAILS HELPER TEXT -->
                   <div id="two-sided-info" class="option-help hide-content alert alert-warning">
-Two-tailed = tests for any difference between groups (conditions, measurements, paired subjects, etc.)  in either direction (e.g., can test if A &#x3e; B and if A &#x3c; B). <br/>
-<br/>Works for directional and non-directional hypotheses. Widely interpretable and accepted in peer review. Won’t “miss” a result if it’s opposite of the hypothesized direction.
-<br/>Slightly larger required sample than one-tailed since it “spends” power testing differences in both directions.
+                    Two-tailed = tests for any difference between groups (conditions, measurements, paired subjects,
+                    etc.) in either direction (e.g., can test if A &#x3e; B and if A &#x3c; B). <br />
+                    <br />Works for directional and non-directional hypotheses. Widely interpretable and accepted in
+                    peer review. Won’t “miss” a result if it’s opposite of the hypothesized direction.
+                    <br />Slightly larger required sample than one-tailed since it “spends” power testing differences in
+                    both directions.
                   </div>
                   <div id="larger-info" class="option-help hide-content alert alert-warning">
-One-tailed = tests a difference between groups (conditions, measurements, paired subjects, etc.) in one direction only (e.g., only tests if A &#x3e; B, won’t test if A &#x3c; B)<br/>
-More power-efficient for tightly controlled research with well-justified directional hypotheses; smaller sample required compared to an equivalent two-tailed test. 
-<br/>Only for directional hypotheses–ignores effects in the opposite direction. Less accepted in peer review unless well justified <i>a priori</i>. 
+                    One-tailed = tests a difference between groups (conditions, measurements, paired subjects, etc.) in
+                    one direction only (e.g., only tests if A &#x3e; B, won’t test if A &#x3c; B)<br />
+                    More power-efficient for tightly controlled research with well-justified directional hypotheses;
+                    smaller sample required compared to an equivalent two-tailed test.
+                    <br />Only for directional hypotheses–ignores effects in the opposite direction. Less accepted in
+                    peer review unless well justified <i>a priori</i>.
                   </div>
 
                   <!-- END TAILS HELPER TEXT -->
@@ -410,32 +476,35 @@ More power-efficient for tightly controlled research with well-justified directi
             <div class="inner" id="ANOVA-options">
               <!-- INDEPENDENCE -->
               <div>
-                What type of ANOVA will you use?
+                <b>What type of ANOVA will you use?</b>
               </div>
               <div class="list-group" id="ANOVA_independence">
                 <button type="button" class="list-group-item list-group-item-action" id="ANOVA_independent"
                   data-selected="false">
-                  Between subjects ANOVA
+                  One-way <b>*between-subjects*</b> ANOVA
 
                   <div class="hide-content" id="ANOVA_independent_groups">
-                    Number of groups:
+                    How many conditions/levels of the IV are you comparing? <em>(Note: for 2 conditions, choose a t-test
+                      instead!)</em>
+
                     <select class="selectpicker" id="groups_num_independent" data-none-selected-text="None">
-                      <option id="two_groups">2</option>
-                      <option id="three_groups">3</option>
-                      <option id="four_groups">4</option>
+                      <option id="two_groups">3</option>
+                      <option id="three_groups">4</option>
+                      <option id="four_groups">5</option>
                     </select>
                   </div>
 
                 </button>
                 <button type="button" class="list-group-item list-group-item-action" id="ANOVA_dependent"
-                  data-selected="false">Within subjects ANOVA
+                  data-selected="false">One-way <b>*within-subjects or repeated measures*</b> ANOVA
 
                   <div class="hide-content" id="ANOVA_dependent_groups">
-                    Number of groups:
+                    How many conditions/levels of the IV are you comparing? <em>(Note: for 2 conditions, choose a t-test
+                      instead!)</em>
                     <select class="selectpicker" id="groups_num_dependent" data-none-selected-text="None">
                       <option id="two_groups">2</option>
-                      <option id="three_groups">3</option>
-                      <option id="four_groups">4</option>
+                      <option id="three_groups">4</option>
+                      <option id="four_groups">5</option>
                     </select>
                   </div>
 
@@ -482,9 +551,28 @@ More power-efficient for tightly controlled research with well-justified directi
         <div class="col-12 alert alert-secondary" id="selections-status">
           {{selection_values}}
         </div>
-         <!-- <div class="col-12 alert alert-secondary" id="tester">
+        <!-- <div class="col-12 alert alert-secondary" id="tester">
           {{selections["methodType"]}}
         </div> -->
+      </div>
+      <div class="row">
+        <div class="col-4 " style="text-align: left;"><h2><b>Parameter Selection</b></h2></div>
+        <div class="col-8 alert alert-primary" style="text-align: left;">
+          <b>Use the sliders or input boxes to customize the alpha, effect size, and power threshold.</b><br/>
+          <span style="padding-left:1em">
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                Blue zone values are generally acceptable for social science and HCI research.
+          </span>
+          <br/>
+          <span style="padding-left:1em">
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                Yellow zone values are note recommended as they compromise study rigor or waste resources.
+          </span>
+        </div>
       </div>
 
       <form id="calc_parameters" action="/calculate_participants" method="get">
@@ -499,49 +587,123 @@ More power-efficient for tightly controlled research with well-justified directi
           value="" />
         <input type="text" name="ANOVA_groups_input" id="ANOVA_groups_value" class="hide-content" value="" />
         <input type="text" name="ANOVA_m_input" id="ANOVA_m_value" class="hide-content" value="" />
-        <div class="row">
+        <div class="row alert alert-secondary">
 
 
           <!-- ALPHA -->
 
           <div class="col-4">
-            <div>Alpha (<em>p</em>-value):</div><br>
-            <input type="text" id="alpha-size"/><br/>
-            <div id="alpha-slider-bg">
-            <input type="text" name="alpha_input" id="alpha_entry" data-slider-id='ex1Slider' data-slider-min="0.001"
-              data-slider-max="0.1" data-slider-step="0.001" data-slider-value="0.05"/><br />
+            <div>Alpha</div>
+            <div class="row" style="margin-top:2em;">
+            <div class="col-3">
+            <em>p</em> = 
             </div>
-            <div id="alpha-feedback" class="alert alert-primary align-items-center"> This is the <em>p</em>-value used to define result significance. Common choices: .05, .01, .001. <br/>Larger <em>p</em>-values = fewer participants 
-<br/> &#x3e;.05 is rarely acceptable, but &#x3c;.01 may mean you’re collecting data from participants that you don’t need, unnecessarily risking their privacy
-</div>
+            <div class="col-9" >
+            <input type="text" id="alpha-size" style="width: 50%;"/><br /><br />
+            <div id="alpha-slider-bg">
+              <input type="text" class="span2" name="alpha_input" id="alpha_entry" data-slider-id='ex1Slider' data-slider-min="0.001"
+                data-slider-max="0.1" data-slider-step="0.001" data-slider-value="0.05" data-slider-handle="custom"/><br />
+            </div>
+            </div>
+            </div>
+            <div id="alpha-feedback" class="alert alert-primary" style="text-align: left;"> 
+               <ul>
+              <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;"><b>Set based on acceptable risk for false positives related to your outcome variable&mdash;this is the significance level you'll use for your planned t-test.</b></span><br />
+              </li>
+              <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;">&lt; .001 risks wasting resources for no meaningful study design improvements </span><br />
+              </li>     
+              <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;">&gt; .05 is generally considered too high a risk for Type 1 Error in most fields </span><br />
+              </li>                            
+            </ul>
+            </div>
           </div>
 
           <!-- EFFECT SIZE -->
           <div class="col-4">
-            <div id="effect-text">{{effect_size_string}}</div>
-            <input type="text" id="effect-size"/><br/>
+            <div >Minimum Detectable Effect Size</div>
+            <div class="row" style="margin-top:2em;">
+            <div class="col-3" id="effect-text">{{effect_size_string}}</div>
+            <div class="col-9" >
+            <input type="text" id="effect-size" style="width: 50%;"/><br /><br />
             <div id="cohens-slider-bg">
-            <input type="number" name="effect_input" id="effect_entry" data-slider-id='ex1Slider' data-slider-min="0.2"
-              data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" /><br />
-              </div>
-            <div id="effect-size-feedback" class="alert alert-primary align-items-center"> T-test effect sizes: small (.2), medium (.5), large (.8). Many studies aim for between .2 and .5
-<br/>Smaller effects = exponentially more participants
-<br/> &#x3e;.8 means you’ll likely collect data you can’t use, risking participant privacy with no scientific gain
-</div>
+              <input type="number" name="effect_input" id="effect_entry" data-slider-id='ex1Slider'
+                data-slider-min="0.2" data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" data-slider-handle="custom" /><br />
+            </div>
+            </div>
+            </div>
+            <div id="effect-size-feedback" class="alert alert-primary" style="text-align: left;">
+              <ul>
+              <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;"><b>Consider thresholds of Small (.2), Medium (.5), Large(.0) and your study goals to choose the smallest <em>meaningful</em> effect your test should be able to detect.</b></span><br />
+              </li>
+                            <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;">MDES &lt; .2 detects negligible effects and is likely not worth the exponentially large N</span><br />
+              </li>
+                            <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;">MDES &gt; .8 wastes resources on untrustworthy study design&mdash;n.s. results can miss true effects and sign. results are likely not reproducible.</span><br />
+              </li>              
+              </ul>
+            </div>
           </div>
 
           <!-- POWER -->
           <div class="col-4">
-            <div id="power-text"><b>Power (1-&#946;):<br/>&nbsp;&nbsp;&nbsp;</b></div>
-            <input type="text" id="power-size"><br/>
-            <div id="power-slider-bg">
-            <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text"
-              data-slider-min="0.5" data-slider-max="0.99" data-slider-step="0.01" data-slider-value="0.8" /><br />
+            <div id="power-text"><b>Power</b></div>
+            <div class="row" style="margin-top:2em;">
+            <div class="col-3">
+            1-&#946; = 
             </div>
-              <div id="power-feedback" class="alert alert-primary align-items-center">A power of .80 (80%) is standard. 
-<br/>Higher power = more participants
-<br/>&#x3c;.80 risks missing true effects and is rarely acceptable; &#x3e;.90 may mean unnecessary data collection from participants
-</div>
+            <div class="col-9" >
+            <input type="text" id="power-size"><br /><br/>
+            <div id="power-slider-bg">
+              <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text"
+                data-slider-min="0.5" data-slider-max="0.99" data-slider-step="0.01" data-slider-value="0.8" data-slider-handle="custom"  /><br />
+            </div>
+            </div>
+            </div>
+            <div id="power-feedback" class="alert alert-primary" style="text-align: left;">
+              <ul>
+              <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;"><b>Set based on acceptable risk for missing true effects in your study and requirements for target publication venue.</b></span><br />
+              </li>
+              <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;">&lt; .80 generally not acceptable as the risk for Type 2 error is high</span><br />
+              </li>  
+              <li> 
+                <svg class="bi" width="16" height="16">
+                  <use xlink:href="#green-check"></use>
+                </svg>
+                <span style="padding-left: 0.3em;">&gt; .90 generally wastes resources and increases risk of the study becoming "overpowered"&mdash;finding significant results that are not meaningful</span><br />
+              </li>                             
+              </ul>
+            </div>
           </div>
         </div>
       </form>
@@ -555,17 +717,19 @@ More power-efficient for tightly controlled research with well-justified directi
           <div class="row">
             <div class="col-12" id="total-count">{{participant_text}}</div>
           </div>
-        
 
-        <div class="hide-content" id="participant-num">{{num_participants}}</div>
-        <div class="col-4" id="count-per-level">Participants per level: {{participants_per_level}}</div>
-        <div class="col-4" id="count-per-group">Participants per group: {{participants_per_level}}</div>
-        <div class="row">
-          <div class="col-12">
-            <i>Note: This sample size result is the target FINAL sample size, not the target recruitment number. You will likely need to recruit more people than this to account for missing data, participant drop-off, etc.</i>
+
+          <div class="hide-content" id="participant-num">{{num_participants}}</div>
+          <div class="col-4" id="count-per-level">Participants per level: {{participants_per_level}}</div>
+          <div class="col-4" id="count-per-group">Participants per group: {{participants_per_level}}</div>
+          <div class="row">
+            <div class="col-12">
+              <i>Note: This sample size result is the target FINAL sample size, not the target recruitment number. You
+                will likely need to recruit more people than this to account for missing data, participant drop-off,
+                etc.</i>
+            </div>
           </div>
-        </div>        
-      </div>
+        </div>
       </div>
 
       <!-- PARTICIPANT COUNT ROW END -->
@@ -579,11 +743,11 @@ More power-efficient for tightly controlled research with well-justified directi
               Size</button>
           </div>
         </div>
-      <div class="col-6">
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="export-log">Export Results</button>
+        <div class="col-6">
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="export-log">Export Results</button>
+          </div>
         </div>
-      </div>
 
       </div>
       <!-- CALCULATE BUTTON END -->

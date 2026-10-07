@@ -59,12 +59,12 @@ def formatSelectionString(paramsDict):
 
     # method is not getting updated how come?
 
-    default_frags = ["You are conducting"," and you want to find the sample size you need to conduct", ". Your ideal sample size depends on your chosen p-value, statistical power, and effect size. Use the standard parameters below or enter your own!"]
+    default_frags = ["You are conducting"," and you want to find the sample size you need to conduct", ". Use the standard parameters below or enter your own! <a href='/select'>Go back to study design</a>"]
     method_frag = ""
 
     desc_frags = ["To detect down to an effect size of <b>"," at <b>","% power</b> (alpha = <b>","</b>) for your <b>","</b>, you will need at least:"]
 
-    effect_size_string = "Minimum Detectable Effect Size"
+    effect_size_string = ""
     d_string = "d = "
 
     if(paramsDict["methodType"] == "experiment"):
@@ -74,11 +74,11 @@ def formatSelectionString(paramsDict):
 
     # IF INDEPENDENT T TEST
     if(paramsDict["Tindependece"] == "independent"):
-        effect_size_string += " (Cohen's <em>d</em>):"
+        effect_size_string += " Cohen's <em>d</em>="
         dependence_frag =  " an <b>independent"
     # IF DEPENDENT T TEST
     elif(paramsDict["Tindependece"] == "dependent"):
-        effect_size_string += " (Cohen's <em>dz</em>):"
+        effect_size_string += " Cohen's <em>dz</em>="
         d_string = "dz = "
         dependence_frag = " a <b>dependent"
 
