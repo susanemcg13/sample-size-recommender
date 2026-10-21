@@ -281,6 +281,15 @@ background-image:
   .option-help{
     font-size: small;
   }
+
+
+  .independent-anova-slider{
+    height:100px;
+  }
+#anova-groups-bg{
+  height:100px;
+}
+
   .nav-scroller .nav {
     display: flex;
     flex-wrap: nowrap;

@@ -43,7 +43,7 @@ def calculateIndependentANOVA(alpha="0.05", power="0.8", effect_size="0.25", num
     
     return math.ceil(rough_per_level)
 
-# for independent (between subjects) ANOVAs
+# for dependent (within subjects) ANOVAs
 def calculateDependentANOVA(alpha="0.05", power="0.8", effect_size="0.25", num_levels="2", m_per_group="2"):
 
     cohens_calc = (effect_size*effect_size)/(2*m_per_group)

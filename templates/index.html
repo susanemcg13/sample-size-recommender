@@ -123,7 +123,7 @@ TODO (in no particular order)
             How SampleSavvy! works:
             <br />
             <ul>
-              <li> 
+              <li>
                 <svg class="bi" width="16" height="16">
                   <use xlink:href="#green-check"></use>
                 </svg>
@@ -136,20 +136,26 @@ TODO (in no particular order)
                   <use xlink:href="#green-check"></use>
                 </svg>
                 <span style="padding-left: 0.3em;"><b>Get an initial sample estimate to fine-tune</b></span><br />
-                <span style="padding-left: 1.6em;">Get an estimate using standard parameters and fine-tune it with guidance on tradeoffs.</span></li>
+                <span style="padding-left: 1.6em;">Get an estimate using standard parameters and fine-tune it with
+                  guidance on tradeoffs.</span>
+              </li>
               <li>
                 <svg class="bi" width="16" height="16">
                   <use xlink:href="#green-check"></use>
                 </svg>
                 <span style="padding-left: 0.3em;"><b>Choose your just-right sample size</b></span><br />
-                <span style="padding-left: 1.6em;">Find an estimate that balances statistical needs with practical considerations.</span></li>
+                <span style="padding-left: 1.6em;">Find an estimate that balances statistical needs with practical
+                  considerations.</span>
+              </li>
               <li>
                 <svg class="bi" width="16" height="16">
                   <use xlink:href="#green-check"></use>
                 </svg>
                 <span style="padding-left: 0.3em;"><b>Choose your just-right sample size</b></span><br />
                 <span style="padding-left: 1.6em;"><b>Export your results</b></span><br />
-                <span style="padding-left: 1.6em;">Generate report-ready documentation for protocols, preregistrations, or manuscripts.</span></li>
+                <span style="padding-left: 1.6em;">Generate report-ready documentation for protocols, preregistrations,
+                  or manuscripts.</span>
+              </li>
             </ul>
 
           </div>
@@ -158,10 +164,14 @@ TODO (in no particular order)
           <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="start-button">Get started</button>
         </div>
 
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-top:60px; font-size: small;"><b>SampleSavvy is built by researchers specializing in study design, privacy, and usability.</b>
-          </div>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-top:20px; font-size: small;">
-          <em>Foundational research for this tool was supported by the National science Foundation under <a href="https://www.nsf.gov/awardsearch/show-award?AWD_ID=2232690" target="_blank">Grant No. 2232690</a>. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</em>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-top:60px; font-size: small;">
+          <b>SampleSavvy is built by researchers specializing in study design, privacy, and usability.</b>
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-top:20px; font-size: small;">
+          <em>Foundational research for this tool was supported by the National science Foundation under <a
+              href="https://www.nsf.gov/awardsearch/show-award?AWD_ID=2232690" target="_blank">Grant No. 2232690</a>.
+            Any opinions, findings and conclusions or recommendations expressed in this material are those of the
+            author(s) and do not necessarily reflect the views of the National Science Foundation.</em>
         </div>
       </div>
     </div>
@@ -300,7 +310,6 @@ TODO (in no particular order)
 
             <div class="inner" id="Ttest-options">
 
-
               <!-- INDEPENDENCE -->
               <div class="row">
                 <div class="col-6">
@@ -347,9 +356,6 @@ TODO (in no particular order)
                 </div>
               </div>
 
-
-
-
               <!-- BALANCE -->
               <div class="row">
                 <div class="col-6">
@@ -388,13 +394,13 @@ TODO (in no particular order)
                     </div>
                   </div>
                   <!-- END OVERALL BALANCE INFO -->
-                  <!-- NALANCE HELPER TEXT -->
+                  <!-- BALANCE HELPER TEXT -->
                   <div id="balance-yes-info" class="option-help hide-content alert alert-warning">
                     Promote group balance through stratified recruitment or quotas. For pre-post tests, use study
                     designs that discourage participant dropout after the pre-test.
                   </div>
                   <div id="balance-no-info" class="option-help hide-content alert alert-warning">
-                    It’s not always possible to recruit equal groups; some variation in group size is common. Focus
+                    It's not always possible to recruit equal groups; some variation in group size is common. Focus
                     recruitment on the group you anticipate being smaller to improve power.
                   </div>
 
@@ -404,8 +410,6 @@ TODO (in no particular order)
 
 
               </div>
-
-
 
               <!-- ONE VS. TWO-TAILED -->
 
@@ -460,13 +464,7 @@ TODO (in no particular order)
                   <!-- END TAILS HELPER TEXT -->
                 </div>
 
-
-
-
               </div>
-
-
-
 
             </div>
 
@@ -475,50 +473,103 @@ TODO (in no particular order)
           <div class="wrapper2">
             <div class="inner" id="ANOVA-options">
               <!-- INDEPENDENCE -->
-              <div>
-                <b>What type of ANOVA will you use?</b>
+              <div class="row">
+                <div class="col-6">
+                  <div class="selection-question">
+                    <b>What type of ANOVA will you use?</b>
+                  </div>
+                  <div class="list-group" id="ANOVA_independence">
+                    <button type="button" class="list-group-item list-group-item-action" id="ANOVA_independent"
+                      data-selected="false">
+                      One-way <b>*between-subjects*</b> ANOVA
+
+
+
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" id="ANOVA_dependent"
+                      data-selected="false">One-way <b>*within-subjects or repeated measures*</b> ANOVA
+
+
+                    </button>
+                  </div>
+                </div>
+                <!-- ANOVA HELPER TEXT -->
+                <div class="col-6 helper-box hide-content" id="ANOVA_independence-helper">
+                  <!-- OVERALL TAILS INFO -->
+                  <div id="ANOVA-type-info" class="alert alert-primary d-flex align-items-center" role="alert">
+                    <!-- <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                      <use xlink:href="#info-fill" />
+                    </svg> -->
+                    <div>
+                      OVERALL ANOVA HELPER TEXT
+                    </div>
+                  </div>
+                  <!-- END OVERALL ANOVA INFO -->
+                  <!-- ANOVA IN/DEPENDENCE HELPER TEXT -->
+                  <div id="ANOVA_independent-info" class="option-help hide-content alert alert-warning">
+                    Independent ANOVA info.
+                  </div>
+                  <div id="ANOVA_dependent-info" class="option-help hide-content alert alert-warning">
+                    Dependent ANOVA info.
+                  </div>
+
+                  <!-- END ANOVA IN/DEPENDENCE HELPER TEXT -->
+                </div>
               </div>
-              <div class="list-group" id="ANOVA_independence">
-                <button type="button" class="list-group-item list-group-item-action" id="ANOVA_independent"
-                  data-selected="false">
-                  One-way <b>*between-subjects*</b> ANOVA
 
-                  <div class="hide-content" id="ANOVA_independent_groups">
-                    How many conditions/levels of the IV are you comparing? <em>(Note: for 2 conditions, choose a t-test
-                      instead!)</em>
+              <!-- CONDITIONS -->
+              <div class="wrapper3">
+                <div class="inner" id="ANOVA-conditions">
+                  <div class="row ">
+                    <div class="col-6">
+                      <div class="selection-question">
 
-                    <select class="selectpicker" id="groups_num_independent" data-none-selected-text="None">
-                      <option id="two_groups">3</option>
-                      <option id="three_groups">4</option>
-                      <option id="four_groups">5</option>
-                    </select>
+                      </div>
+                      <div class="list-group" id="conditions">
+                        <button type="button" class="list-group-item list-group-item-action hide-content"
+                          id="conditions-independent" data-selected="false">
+                          Select the number of groups below:
+
+                          <div id="anova-groups-bg">
+                            <input type="text" class="independent-anova-slider" name="anova_groups_input"
+                              id="anova_groups_entry" data-slider-id='anova-groups'
+                              data-slider-ticks="[3, 4, 5, 6, 7, 8, 9, 10]" 
+                              data-slider-ticks-labels='["3", "4", "5", "6", "7", "8", "9", "10"]'
+                              data-slider-tooltip="hide" /><br />
+                          </div>
+
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action hide-content"
+                          id="conditions-dependent" data-selected="false">
+                          This is the number of measures, because you chose dependent
+
+                        </button>
+                      </div>
+
+                    </div>
+
+                    <!-- CONDITIONS HELPER TEXT -->
+                    <div class="col-6 helper-box hide-content" id="conditions-helper">
+                      <!-- OVERALL CONDITIONS INFO -->
+                      <div id="conditions-info" class="alert alert-primary d-flex align-items-center" role="alert">
+                        OVERALL CONDITIONS INFO
+                      </div>
+                      <!-- END OVERALL CONDITIONS INFO -->
+                      <!-- CONDITIONS HELPER TEXT -->
+                      <div id="conditions-independent-info" class="option-help hide-content alert alert-warning">
+                        Independent, this selection = number of groups
+                      </div>
+                      <div id="conditions-dependent-info" class="option-help hide-content alert alert-warning">
+                        Dependent = number of measurements, groups is always 1
+                      </div>
+
+                      <!-- END CONDITIONS HELPER TEXT -->
+                    </div>
                   </div>
+                </div>
 
-                </button>
-                <button type="button" class="list-group-item list-group-item-action" id="ANOVA_dependent"
-                  data-selected="false">One-way <b>*within-subjects or repeated measures*</b> ANOVA
-
-                  <div class="hide-content" id="ANOVA_dependent_groups">
-                    How many conditions/levels of the IV are you comparing? <em>(Note: for 2 conditions, choose a t-test
-                      instead!)</em>
-                    <select class="selectpicker" id="groups_num_dependent" data-none-selected-text="None">
-                      <option id="two_groups">2</option>
-                      <option id="three_groups">4</option>
-                      <option id="four_groups">5</option>
-                    </select>
-                  </div>
-
-                  <div class="hide-content" id="ANOVA_m_per_group">
-                    Measurements/group:
-                    <select class="selectpicker" id="measures_per_group" data-none-selected-text="None">
-                      <option id="two_groups">2</option>
-                      <option id="three_groups">3</option>
-                      <option id="four_groups">4</option>
-                    </select>
-                  </div>
-
-                </button>
               </div>
+
 
 
             </div>
@@ -529,18 +580,21 @@ TODO (in no particular order)
 
         </div>
         <!-- END OVERALL SELECTIONS GROUP -->
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3" id="submit-test-info"
-              disabled>Next</button>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <button type="submit" form="calc_parameters" class="btn btn-primary btn-lg px-4 gap-3"
+                id="submit-test-info" disabled>Next</button>
+            </div>
+
           </div>
+
 
         </div>
 
-
       </div>
+
 
     </div>
     <!-- METHODS PAGE END-->
@@ -556,21 +610,23 @@ TODO (in no particular order)
         </div> -->
       </div>
       <div class="row">
-        <div class="col-4 " style="text-align: left;"><h2><b>Parameter Selection</b></h2></div>
+        <div class="col-4 " style="text-align: left;">
+          <h2><b>Parameter Selection</b></h2>
+        </div>
         <div class="col-8 alert alert-primary" style="text-align: left;">
-          <b>Use the sliders or input boxes to customize the alpha, effect size, and power threshold.</b><br/>
+          <b>Use the sliders or input boxes to customize the alpha, effect size, and power threshold.</b><br />
           <span style="padding-left:1em">
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                Blue zone values are generally acceptable for social science and HCI research.
+            <svg class="bi" width="16" height="16">
+              <use xlink:href="#green-check"></use>
+            </svg>
+            Blue zone values are generally acceptable for social science and HCI research.
           </span>
-          <br/>
+          <br />
           <span style="padding-left:1em">
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                Yellow zone values are note recommended as they compromise study rigor or waste resources.
+            <svg class="bi" width="16" height="16">
+              <use xlink:href="#green-check"></use>
+            </svg>
+            Yellow zone values are not recommended as they compromise study rigor or waste resources.
           </span>
         </div>
       </div>
@@ -595,74 +651,85 @@ TODO (in no particular order)
           <div class="col-4">
             <div>Alpha</div>
             <div class="row" style="margin-top:2em;">
-            <div class="col-3">
-            <em>p</em> = 
+              <div class="col-3">
+                <em>p</em> =
+              </div>
+              <div class="col-9">
+                <input type="text" id="alpha-size" style="width: 50%;" /><br /><br />
+                <div id="alpha-slider-bg">
+                  <input type="text" class="span2" name="alpha_input" id="alpha_entry" data-slider-id='ex1Slider'
+                    data-slider-min="0.001" data-slider-max="0.1" data-slider-step="0.001" data-slider-value="0.05"
+                    data-slider-handle="custom" /><br />
+                </div>
+              </div>
             </div>
-            <div class="col-9" >
-            <input type="text" id="alpha-size" style="width: 50%;"/><br /><br />
-            <div id="alpha-slider-bg">
-              <input type="text" class="span2" name="alpha_input" id="alpha_entry" data-slider-id='ex1Slider' data-slider-min="0.001"
-                data-slider-max="0.1" data-slider-step="0.001" data-slider-value="0.05" data-slider-handle="custom"/><br />
-            </div>
-            </div>
-            </div>
-            <div id="alpha-feedback" class="alert alert-primary" style="text-align: left;"> 
-               <ul>
-              <li> 
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                <span style="padding-left: 0.3em;"><b>Set based on acceptable risk for false positives related to your outcome variable&mdash;this is the significance level you'll use for your planned t-test.</b></span><br />
-              </li>
-              <li> 
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                <span style="padding-left: 0.3em;">&lt; .001 risks wasting resources for no meaningful study design improvements </span><br />
-              </li>     
-              <li> 
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                <span style="padding-left: 0.3em;">&gt; .05 is generally considered too high a risk for Type 1 Error in most fields </span><br />
-              </li>                            
-            </ul>
+            <div id="alpha-feedback" class="alert alert-primary" style="text-align: left;">
+              <ul>
+                <li>
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#green-check"></use>
+                  </svg>
+                  <span style="padding-left: 0.3em;"><b>Set based on acceptable risk for false positives related to your
+                      outcome variable&mdash;this is the significance level you'll use for your planned
+                      t-test.</b></span><br />
+                </li>
+                <li>
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#green-check"></use>
+                  </svg>
+                  <span style="padding-left: 0.3em;">&lt; .001 risks wasting resources for no meaningful study design
+                    improvements </span><br />
+                </li>
+                <li>
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#green-check"></use>
+                  </svg>
+                  <span style="padding-left: 0.3em;">&gt; .05 is generally considered too high a risk for Type 1 Error
+                    in most fields </span><br />
+                </li>
+              </ul>
             </div>
           </div>
 
           <!-- EFFECT SIZE -->
           <div class="col-4">
-            <div >Minimum Detectable Effect Size</div>
+            <div>Minimum Detectable Effect Size</div>
             <div class="row" style="margin-top:2em;">
-            <div class="col-3" id="effect-text">{{effect_size_string}}</div>
-            <div class="col-9" >
-            <input type="text" id="effect-size" style="width: 50%;"/><br /><br />
-            <div id="cohens-slider-bg">
-              <input type="number" name="effect_input" id="effect_entry" data-slider-id='ex1Slider'
-                data-slider-min="0.2" data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5" data-slider-handle="custom" /><br />
-            </div>
-            </div>
+              <div class="col-3" id="effect-text">{{effect_size_string}}</div>
+              <div class="col-9">
+                <input type="text" id="effect-size" style="width: 50%;" /><br /><br />
+                <div id="cohens-slider-bg">
+                  <input type="number" name="effect_input" id="effect_entry" data-slider-id='ex1Slider'
+                    data-slider-min="0.2" data-slider-max="0.8" data-slider-step="0.01" data-slider-value="0.5"
+                    data-slider-handle="custom" /><br />
+                </div>
+              </div>
             </div>
             <div id="effect-size-feedback" class="alert alert-primary" style="text-align: left;">
               <ul>
-              <li> 
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                <span style="padding-left: 0.3em;"><b>Consider thresholds of Small (.2), Medium (.5), Large(.0) and your study goals to choose the smallest <em>meaningful</em> effect your test should be able to detect.</b></span><br />
-              </li>
-                            <li> 
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                <span style="padding-left: 0.3em;">MDES &lt; .2 detects negligible effects and is likely not worth the exponentially large N</span><br />
-              </li>
-                            <li> 
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                <span style="padding-left: 0.3em;">MDES &gt; .8 wastes resources on untrustworthy study design&mdash;n.s. results can miss true effects and sign. results are likely not reproducible.</span><br />
-              </li>              
+                <li>
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#green-check"></use>
+                  </svg>
+                  <span style="padding-left: 0.3em;"><b>Consider thresholds of Small (.2), Medium (.5), Large(.0) and
+                      your study goals to choose the smallest <em>meaningful</em> effect your test should be able to
+                      detect.</b></span><br />
+                </li>
+                <li>
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#green-check"></use>
+                  </svg>
+                  <span style="padding-left: 0.3em;">MDES &lt; .2 detects negligible effects and is likely not worth the
+                    exponentially large N</span><br />
+                </li>
+                <li>
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#green-check"></use>
+                  </svg>
+                  <span style="padding-left: 0.3em;">MDES &gt; .8 wastes resources on untrustworthy study
+                    design&mdash;n.s. results can miss true effects and sign. results are likely not
+                    reproducible.</span><br />
+                </li>
               </ul>
             </div>
           </div>
@@ -671,37 +738,41 @@ TODO (in no particular order)
           <div class="col-4">
             <div id="power-text"><b>Power</b></div>
             <div class="row" style="margin-top:2em;">
-            <div class="col-3">
-            1-&#946; = 
-            </div>
-            <div class="col-9" >
-            <input type="text" id="power-size"><br /><br/>
-            <div id="power-slider-bg">
-              <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text"
-                data-slider-min="0.5" data-slider-max="0.99" data-slider-step="0.01" data-slider-value="0.8" data-slider-handle="custom"  /><br />
-            </div>
-            </div>
+              <div class="col-3">
+                1-&#946; =
+              </div>
+              <div class="col-9">
+                <input type="text" id="power-size"><br /><br />
+                <div id="power-slider-bg">
+                  <input type="text" name="power_input" id="power_entry" data-slider-id='ex1Slider' type="text"
+                    data-slider-min="0.5" data-slider-max="0.99" data-slider-step="0.01" data-slider-value="0.8"
+                    data-slider-handle="custom" /><br />
+                </div>
+              </div>
             </div>
             <div id="power-feedback" class="alert alert-primary" style="text-align: left;">
               <ul>
-              <li> 
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                <span style="padding-left: 0.3em;"><b>Set based on acceptable risk for missing true effects in your study and requirements for target publication venue.</b></span><br />
-              </li>
-              <li> 
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                <span style="padding-left: 0.3em;">&lt; .80 generally not acceptable as the risk for Type 2 error is high</span><br />
-              </li>  
-              <li> 
-                <svg class="bi" width="16" height="16">
-                  <use xlink:href="#green-check"></use>
-                </svg>
-                <span style="padding-left: 0.3em;">&gt; .90 generally wastes resources and increases risk of the study becoming "overpowered"&mdash;finding significant results that are not meaningful</span><br />
-              </li>                             
+                <li>
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#green-check"></use>
+                  </svg>
+                  <span style="padding-left: 0.3em;"><b>Set based on acceptable risk for missing true effects in your
+                      study and requirements for target publication venue.</b></span><br />
+                </li>
+                <li>
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#green-check"></use>
+                  </svg>
+                  <span style="padding-left: 0.3em;">&lt; .80 generally not acceptable as the risk for Type 2 error is
+                    high</span><br />
+                </li>
+                <li>
+                  <svg class="bi" width="16" height="16">
+                    <use xlink:href="#green-check"></use>
+                  </svg>
+                  <span style="padding-left: 0.3em;">&gt; .90 generally wastes resources and increases risk of the study
+                    becoming "overpowered"&mdash;finding significant results that are not meaningful</span><br />
+                </li>
               </ul>
             </div>
           </div>
