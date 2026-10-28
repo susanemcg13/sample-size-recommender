@@ -64,6 +64,10 @@ def formatSelectionString(paramsDict):
 
     desc_frags = ["To detect down to an effect size of <b>"," at <b>","% power</b> (alpha = <b>","</b>) for your <b>","</b>, you will need at least:"]
 
+    dependence_frag = "ANOVA dependence MISSING HERE"
+    balance_frag = "ANOVA balance MISSING HERE"
+    tails_frag = "ANOVA tails MISSING HERE"
+
     effect_size_string = ""
     d_string = "d = "
 

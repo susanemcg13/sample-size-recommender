@@ -48,13 +48,14 @@ var anovaGroupsSlider = new Slider('#anova_groups_entry', {
         return 'Current value: ' + value;
     }
 });
-anovaGroupsSlider.on("change", anovaUpdate);
 
 
-function anovaUpdate(){
-    console.log("What now?");
+var anovaMeasuresSlider = new Slider('#anova_measures_entry', {
+    formatter: function (value) {
+        return 'Current value: ' + value;
+    }
+});
 
-}
 
 
 if (current_url == "/select") {
@@ -120,9 +121,11 @@ if (current_url == "/calculate_participants") {
     document.getElementById("balance_value").value = query_params.get('balance_input');
 
     // these are for ANOVAs
+    console.log("Checking measures input param: ");
+    console.log(query_params.get('ANOVA_measures_input'));
     document.getElementById("ANOVA_groups_value").value = query_params.get('ANOVA_groups_input');
     document.getElementById("ANOVA_independence_value").value = query_params.get('ANOVA_independence_input');
-    document.getElementById("ANOVA_m_value").value = query_params.get('ANOVA_m_input');
+    document.getElementById("ANOVA_measures_value").value = query_params.get('ANOVA_measures_input');
 
 
     // here's where we very awkwardly show/hide things based on the test type
@@ -378,10 +381,6 @@ function optionClick(event) {
     parent_list = document.getElementById(containingList);
 
 
-    // console.log("Checking target name:")
-    // console.log(event.target.id)
-    // console.log(event.currentTarget.id)
-
     // OK, so e.g. containingList will be "method" and event.target.id will be "survey"
 
     if (parent_list) {
@@ -396,7 +395,6 @@ function optionClick(event) {
         }
 
         // Looping through all option-specific helper text also
-        // console.log(containingList)
         helper_div = document.getElementById(containingList + "-helper");
 
 
@@ -429,19 +427,20 @@ function optionClick(event) {
     // Well, the query string is hideous but that's not unusual and at least it's readable
     if (event.target.id != "start-button" && event.target.id != "export-log") {
         var currentFormEntry;
-        if(event.target.id == "anova-groups"){
+        console.log("look out now:"+event.target.id);
+        console.log("look out again:"+event.currentTarget.id);
+        //now we're baking in the logic that independent anovas have groups and dependent anovas have measures 
+        if (event.target.id == "anova-groups" || event.currentTarget.id == "conditions-independent") {
+            currentFormEntry = document.getElementById("ANOVA_groups_value");
+            currentFormEntry.value = anovaGroupsSlider.getValue();
             console.log(anovaGroupsSlider.getValue());
-        }
-
-        if (containingList == "ANOVA_independent_groups") {
-            currentFormEntry = document.getElementById("ANOVA_groups_value");
-            currentFormEntry.value = event.target.value;
-        } else if (containingList == "ANOVA_dependent_groups") {
-            currentFormEntry = document.getElementById("ANOVA_groups_value");
-            currentFormEntry.value = event.target.value;
-        } else if (containingList == "ANOVA_m_per_group") {
-            currentFormEntry = document.getElementById("ANOVA_m_value");
-            currentFormEntry.value = event.target.value;
+        } else if (event.target.id == "anova-measures" || event.currentTarget.id == "conditions-dependent") {
+            currentFormEntry = document.getElementById("ANOVA_measures_value");
+            console.log(anovaMeasuresSlider.getValue());
+            currentFormEntry.value = anovaMeasuresSlider.getValue();
+        // } else if (containingList == "ANOVA_m_per_group") {
+        //     currentFormEntry = document.getElementById("ANOVA_m_value");
+        //     currentFormEntry.value = event.target.value;
         } else {
             currentFormEntry = document.getElementById(containingList + "_value");
             if (currentFormEntry) {
@@ -478,20 +477,20 @@ function optionClick(event) {
             document.getElementById("conditions-independent").classList.remove('hide-content');
             anovaGroupsSlider.refresh({ useCurrentValue: true });
             document.getElementById("conditions-dependent").classList.add('hide-content');
+            document.getElementById('ANOVA_independence_value').value = "ANOVA_independent";
+            // NEED TO SET THE INPUT VALUE HERE 
+
         }
         if (event.currentTarget.id == "ANOVA_dependent") {
             document.getElementById("conditions-dependent").classList.remove('hide-content');
+            anovaMeasuresSlider.refresh({ useCurrentValue: true });
             document.getElementById("conditions-independent").classList.add('hide-content');
+            document.getElementById('ANOVA_independence_value').value = "ANOVA_dependent";
+            // NEED TO SET THE INPUT VALUE HERE 
         }
 
     }
 
-
-    // if (event.target.id == "ANOVA_dependent") {
-    //     document.getElementById("ANOVA_dependent_groups").classList.remove("hide-content");
-    //     document.getElementById("ANOVA_m_per_group").classList.remove("hide-content");
-    //     document.getElementById("ANOVA_independent_groups").classList.add("hide-content");
-    // }
 
 
 
@@ -515,26 +514,28 @@ function checkSelections() {
         }
     }
 
-    // IF WE ARE DOING A SURVEY ANOVA
+    // IF WE ARE DOING AN ANOVA
     // Here's the options we've outlined for One-way ANOVA:
     // Independent (between subjects) vs Dependent (within subjects)
     // Always balanced, always "two-tailed" (non-directional)
+    console.log("in check selections")
     if (document.getElementById('method_value').value == "survey" && document.getElementById('test_value').value == "ANOVA") {
         // we are doing a survey ANOVA
-        console.log("checking here");
+        console.log("we're doing an ANOVA!")
         if (document.getElementById('ANOVA_independence_value').value == "ANOVA_independent" && document.getElementById("ANOVA_groups_value").value != "") {
             // in this case, we're doing an independent ANOVA and we have the number of levels/groups
+            console.log("yes?!")
             testButton.disabled = false;
             console.log("we have this many levels/groups");
             console.log(document.getElementById("ANOVA_groups_value").value);
-            console.log("Now we just a server function to process these results");
+            console.log("Now we just need a server function to process these results");
         }
-        if (document.getElementById('ANOVA_independence_value').value == "ANOVA_dependent" && document.getElementById("ANOVA_groups_value").value != "" && document.getElementById("ANOVA_m_value").value != "") {
+        if (document.getElementById('ANOVA_independence_value').value == "ANOVA_dependent" && document.getElementById("ANOVA_measures_value").value != "") {
             // in this case, we're doing an independent ANOVA and we have the number of levels/groups
             testButton.disabled = false;
             console.log("looks like we're doing a dependent ANOVA");
-            console.log(document.getElementById("ANOVA_groups_value").value);
-            console.log("Now we just a server function to process these results");
+            console.log(document.getElementById("ANOVA_measures_value").value);
+            console.log("Now we just need a server function to process these results");
         }
 
     }

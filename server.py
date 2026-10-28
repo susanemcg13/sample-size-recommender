@@ -37,6 +37,7 @@ def select():
 
 
 def get_participantCount():
+    print("In participant count!", flush=True) 
     # This is where we're pulling values from the "index.html" form
     # Let's see if the args value matches the "name" or "id" value in the form input; I'm guessing the former
     # user_alpha = request.args.get('alpha_input')
@@ -67,7 +68,7 @@ def get_participantCount():
         "Tbalance":request.args.get('balance_input'),
         "ANOVA_independence": request.args.get('ANOVA_independence_input'),
         "ANOVA_groups" : request.args.get('ANOVA_groups_input'),
-        "ANOVA_mpg" : request.args.get('ANOVA_m_input')
+        "ANOVA_mpg" : request.args.get('ANOVA_measures_input')
     }
 
     # Add some error handling here before passing the values along!
@@ -103,13 +104,19 @@ def get_participantCount():
             per_group = calculateIndependentANOVA(float(parameters["user_alpha"]), float(parameters["user_power"]), float(parameters["user_effect"]), float(parameters["ANOVA_groups"]))
 
             display_num = per_group*float(parameters["ANOVA_groups"])
+            group_description = str(display_num)+" independent ANOVA"
             selection_string = "You did an independent ANOVA"
 
         # same same, for dependent
         if(parameters["ANOVA_independence"] == "ANOVA_dependent"):
-            per_group = calculateDependentANOVA(float(parameters["user_alpha"]), float(parameters["user_power"]), float(parameters["user_effect"]), float(parameters["ANOVA_groups"]), float(parameters["ANOVA_mpg"]))
+
+            print("in dependent anova calculation")
+            print("here is ANOVA mpg: " + parameters["ANOVA_mpg"])
+            per_group = calculateDependentANOVA(float(parameters["user_alpha"]), float(parameters["user_power"]), float(parameters["user_effect"]), 1, float(parameters["ANOVA_mpg"]))
 
             display_num = per_group
+
+            group_description = str(display_num)+" dependent ANOVA"
         
             selection_string = "You did a dependent ANOVA"
     
