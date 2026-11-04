@@ -258,10 +258,10 @@ TODO (in no particular order)
                     </button>
                     <button type="button" class="list-group-item list-group-item-action" id="ANOVA"
                       data-selected="false">
-                      ANOVA
+                      One-way ANOVA
                     </button>
                     <button type="button" class="list-group-item list-group-item-action" id="other"
-                      data-selected="false" disabled>More options coming soon!</button>
+                      data-selected="false" disabled>Factorial ANOVA (coming soon)</button>
 
                   </div>
                 </div>
@@ -275,7 +275,7 @@ TODO (in no particular order)
                     <div>
                       Different tests require different sample sizes. <br />
                       Start with the test that addresses your main hypothesis; add others later if needed. <br />
-                      P.S. It’s easy to export and save your results if you need to compare sample size estimates for
+                      P.S. It'’'s easy to export and save your results if you need to compare sample size estimates for
                       multiple tests.
                     </div>
                   </div>
@@ -481,13 +481,13 @@ TODO (in no particular order)
                   <div class="list-group" id="ANOVA_independence">
                     <button type="button" class="list-group-item list-group-item-action" id="ANOVA_independent"
                       data-selected="false">
-                      One-way <b>*between-subjects*</b> ANOVA
+                      One-way independent ANOVA (between-subjects)</b> ANOVA
 
 
 
                     </button>
                     <button type="button" class="list-group-item list-group-item-action" id="ANOVA_dependent"
-                      data-selected="false">One-way <b>*within-subjects or repeated measures*</b> ANOVA
+                      data-selected="false">One-way dependent ANOVA (within-subjects/repeated measures)</b> ANOVA
 
 
                     </button>
@@ -534,18 +534,18 @@ TODO (in no particular order)
                             <input type="text" class="independent-anova-slider" name="anova_groups_input"
                               id="anova_groups_entry" data-slider-id='anova-groups'
                               data-slider-ticks="[3, 4, 5, 6, 7, 8, 9, 10]" 
-                              data-slider-ticks-labels='["3", "4", "5", "6", "7", "8", "9", "10"]'
+                              data-slider-ticks-labels='["3", "4", "5", "6", "7", "8", "9", "10"]' data-slider-value="3"
                               data-slider-tooltip="hide" /><br />
                           </div>
 
                         </button>
                         <button type="button" class="list-group-item list-group-item-action hide-content"
                           id="conditions-dependent" data-selected="false">
-                          This is the number of measures, because you chose dependent
+                          This is the number of measures/within subject conditions
 
                           <div id="anova-measures-bg">
                             <input type="text" class="dependent-anova-slider" name="anova_measures_input"
-                              id="anova_measures_entry" data-slider-id='anova-measures'
+                              id="anova_measures_entry" data-slider-id='anova-measures' data-slider-value="3"
                               data-slider-ticks="[3, 4, 5, 6, 7, 8, 9, 10]" 
                               data-slider-ticks-labels='["3", "4", "5", "6", "7", "8", "9", "10"]'
                               data-slider-tooltip="hide" /><br />
@@ -652,7 +652,7 @@ TODO (in no particular order)
           value="" />
         <input type="text" name="ANOVA_groups_input" id="ANOVA_groups_value" class="hide-content" value="" />
         <input type="text" name="ANOVA_measures_input" id="ANOVA_measures_value" class="hide-content" value="" />
-        <input type="text" name="ANOVA_m_input" id="ANOVA_m_value" class="hide-content" value="" />
+        <!-- <input type="text" name="ANOVA_m_input" id="ANOVA_m_value" class="hide-content" value="" /> -->
         <div class="row alert alert-secondary">
 
 
