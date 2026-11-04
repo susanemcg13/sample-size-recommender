@@ -104,19 +104,18 @@ def get_participantCount():
             per_group = calculateIndependentANOVA(float(parameters["user_alpha"]), float(parameters["user_power"]), float(parameters["user_effect"]), float(parameters["ANOVA_groups"]))
 
             display_num = per_group*float(parameters["ANOVA_groups"])
-            group_description = str(display_num)+" independent ANOVA"
+            group_description = str(int(display_num))+" total participants, "+str(int(per_group))+" per group"
             selection_string = "You did an independent ANOVA"
 
         # same same, for dependent
         if(parameters["ANOVA_independence"] == "ANOVA_dependent"):
 
-            print("in dependent anova calculation")
-            print("here is ANOVA mpg: " + parameters["ANOVA_mpg"])
+            
             per_group = calculateDependentANOVA(float(parameters["user_alpha"]), float(parameters["user_power"]), float(parameters["user_effect"]), 1, float(parameters["ANOVA_mpg"]))
 
             display_num = per_group
 
-            group_description = str(display_num)+" dependent ANOVA"
+            group_description = str(int(display_num))+" total participants, "+ str(int(parameters["ANOVA_mpg"]))+" per measure"
         
             selection_string = "You did a dependent ANOVA"
     
